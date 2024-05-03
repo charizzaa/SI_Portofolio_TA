@@ -20,8 +20,8 @@
                 <div class="flex flex-col justify-start w-1/2 mt-56 space-y-8">
                     <h1 class="font-bold text-8xl ml-28 text-[#025E5A]">Oops!</h1>
                     <div class="flex flex-col justify-start w-1/2 ml-28 space-y-2">
-                        <h3 class="font-bold text-3xl text-[#025E5A]">This Page is Still</h3>
-                        <h3 class="font-bold text-3xl text-[#025E5A]">Under Maintenance</h3>
+                        <h3 class="font-bold text-3xl text-[#025E5A]">Halaman ini dalam</h3>
+                        <h3 class="font-bold text-3xl text-[#025E5A]">masa perbaikan!</h3>
                     </div>
                 </div>
             </div>

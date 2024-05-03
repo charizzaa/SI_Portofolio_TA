@@ -15,7 +15,7 @@
     <title>Login</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
         .CONTAINER_BACKGROUND {
@@ -111,10 +111,10 @@
         <nav id="header" class="grid grid-cols-2 py-8 w-full">
             <div id="header_kiri" class="flex items-center justify-items-start ms-8">
                 <img class="w-32 h-auto" src="{{ asset('asset/ugm.png') }}" alt="">
-                <div class=" ms-8">
-                    <p class="text-white text-lg">Sarjana Terapan</p>
-                    <p class="text-white text-lg">Teknologi Rekayasa Perangkat Lunak</p>
-                    <p class="text-white text-lg">Universitas Gadjah Mada</p>
+                <div class="ms-8 hidden md:block">
+                    <p class="text-white text-lg text-nowrap">Sarjana Terapan</p>
+                    <p class="text-white text-lg text-nowrap">Teknologi Rekayasa Perangkat Lunak</p>
+                    <p class="text-white text-lg text-nowrap">Universitas Gadjah Mada</p>
                 </div>
             </div>
 
@@ -143,29 +143,28 @@
 
                 
                 <div id="header_kanan" class="flex justify-end items-center me-6 lg:me-20">
-                    <div class="sticky lg:flex flex-col lg:flex-row">
-                        <button id="toggleButton" class="lg:hidden h-12 px-4">
+                    <div class="sticky flex flex-col items-end">
+                        <button id="toggleButton" class="xl:hidden h-12 px-4">
                             <svg class="text-teal-800 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16m-7 6h7"></path>
                             </svg>
                         </button>
                 
-                        <div id="navbarCollapse"
-                            class="hidden lg:flex flex-col lg:flex-row lg:items-center lg:space-x-10 lg:mx-16">
+                        <div id="navbarCollapse" class="hidden xl:flex flex-col xl:flex-row xl:items-center xl:space-x-7 xl:mx-16">
                             <button type="button" onclick="window.location.href='{{ route('public.dashboard')}}'"
-                                class="border-solid border-2 border-teal-800 h-12 px-11 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 shadow-none hover:drop-shadow-lg text-teal-800 text-xl hover:text-white transition-all duration-200">
+                                class="w-full border-solid border-2 border-teal-800 h-12 px-11 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 shadow-none hover:drop-shadow-lg text-teal-800 text-xl hover:text-white transition-all duration-200">
                                 Home
                             </button>
                 
                             <button type="button"
                                 onclick="window.location.href='{{ route('public.portofolio', ['category' => 'all']) }}'"
-                                class="border-solid border-2 border-teal-800 h-12 px-6 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
-                                Showcase
+                                class="w-full border-solid border-2 border-teal-800 h-12 px-6 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
+                                Showcases
                             </button>
                 
                             <button type="button" onclick="window.location.href='{{ route('login')}}'"
-                                class="border-solid border-2 border-teal-800 h-12 px-12 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
+                                class="w-full border-solid border-2 border-teal-800 h-12 px-12 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
                                 Login
                             </button>
                         </div>
@@ -182,8 +181,8 @@
 
         </main>
 
-        <footer class="w-full bg-teal-800 h-auto grid grid-cols-3 py-16 pb-16">
-            <div id="footer_kiri" class="flex flex-col ms-16 ">
+        <footer class="w-full bg-teal-800 h-auto flex flex-col-reverse md:flex-row py-16 pb-16 gap-20">
+            <div id="footer_kiri" class="flex flex-col ms-20">
                 <img class="w-40 h-auto" src="{{ asset('asset/ugm.png') }}" alt="">
                 <p class="text-white text-lg mt-6">Universitas Gadjah Mada</p>
                 <p class="text-white text-lg mt-1">Sekolah Vokasi</p>
@@ -199,7 +198,7 @@
                 </div>
             </div>
 
-            <div id="footer_kanan" class="flex justify-center col-span-2 space-x-16">
+            <div id="footer_kanan" class="flex flex-col md:flex-row justify-center col-span-2 gap-20 px-20">
                 <div class="flex flex-col">
                     <p class="text-white text-2xl font-bold mb-4">PRANALA PENTING</p>
                     <p class="text-white text-lg mt-6">Pendaftaran Mahasiswa Baru</p>

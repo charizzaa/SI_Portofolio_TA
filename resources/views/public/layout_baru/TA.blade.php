@@ -5,35 +5,30 @@
     <main class="w-full flex flex-col items-center mt-12">
 
         <div class="w-full flex justify-end mb-80">
-            <div class="relative bg-teal-800 w-[700px] h-[400px] shadow-md shadow-slate-800">
+            <div class="relative bg-teal-800 w-[40vw] h-[25vw] shadow-md shadow-slate-800">
                 <div
-                    class="absolute right-96 me-20 top-12 w-[700px] h-[400px] border-teal-500 border-[15px] shadow-md shadow-slate-800">
+                    class="absolute right-[25vw] me-20 top-[7vw] w-[40vw] h-[25vw] border-teal-500 border-[15px] shadow-md shadow-slate-800">
                 </div>
                 <img src="{{asset('content/content_image/thumbnail/' . $contents->thumbnail_image_url)}}"
-                    class="absolute right-72 top-24 w-[700px] h-[400px] shadow-md shadow-slate-800">
+                    class="absolute right-[15vw] top-[10vw] w-[50vw] h-[25vw] shadow-md shadow-slate-800">
             </div>
         </div>
 
         <p class="text-teal-800 w-[70%] text-center text-5xl font-bold">{{$contents->tittle}}</p>
 
-        <div class="mt-[-100px] mx-auto py-8" style="max-width: 1308px;">
+        <div class="mt-[-100px] mx-auto py-8 w-[80%]" style="max-width: 1308px;">
             <div class="relative">
 
                 <!-- Carousel Container -->
                 <div class="overflow-hidden w-full rounded-lg">
                     <!-- Slides Container -->
                     <div id="slides" class="flex transition-transform ease-in-out duration-300 transform translate-x-0">
-
-
                         <!-- Slide 1 -->
-
                         @foreach ($arrayimages as $data)
-                            <div id="container_tag" class="flex mt-48 space-x-16 w-100 h-80 me-8">
+                            <div id="container_tag" class="flex mt-48 space-x-16 w-500 h-80 me-8">
                                 <img src="{{asset('content/content_image/preview/' . $data)}}" alt="">
                             </div>
                         @endforeach
-
-
                     </div>
                 </div>
 
@@ -52,34 +47,37 @@
             </div>
         </div>
 
-        <div class="flex flex-col w-full justify-start px-64 mt-12">
+        <div class="flex flex-col justify-start w-[80%] mt-12">
             <div class="relative flex w-full h-auto">
                 <p class="text-teal-800 text-3xl w-auto font-bold border-b-4 border-teal-800 mb-12 py-2">Deskripsi</p>
                 <div class="absolute top-14 start-0 border-b-2 w-full border-teal-800 z-20"></div>
             </div>
             <p class="text-teal-800 text-2xl w-auto font-bold mb-20">{{$contents->description}}</p>
             <div class="relative flex w-full h-auto">
-                <p class="text-teal-800 text-3xl w-auto font-bold border-b-4 border-teal-800 mb-12 py-2">Informasi</p>
+                <p class="text-teal-800 text-3xl w-auto font-bold border-b-4 border-teal-800 mb-4 py-2">Informasi</p>
                 <div class="absolute top-14 start-0 border-b-2 w-full border-teal-800 z-20"></div>
             </div>
-            <div class="flex flex-row">
-                <div class="flex flex-col me-80">
-                    <p class="text-teal-800 text-2xl w-auto font-bold mb-12">Pembuat</p>
-                    <p class="text-teal-800 text-2xl w-auto font-bold mb-12">Tanggal di ubah</p>
-                    <p class="text-teal-800 text-2xl w-auto font-bold mb-12">Dosen pembimbing</p>
-                </div>
-
-                <div class="flex flex-col">
-                    <p class="text-teal-800 text-2xl w-auto font-bold mb-12">{{$contents->owner}}</p>
-                    <p class="text-teal-800 text-2xl w-auto font-bold mb-12">{{$contents->updated_at}}</p>
-                    <p class="text-teal-800 text-2xl w-auto font-bold mb-12">{{$contents->name}}</p>
-                </div>
-            </div>
+            <table class="table-fixed border-separate border-spacing-y-8">
+                <tbody class="">
+                    <tr class="align-top">
+                        <td class="text-teal-800 text-2xl w-auto font-bold">Pembuat</td>
+                        <td class="text-teal-800 text-2xl w-auto font-bold">{{$contents->owner}}</td>
+                    </tr>
+                    <tr class="align-top">
+                        <td class="text-teal-800 text-2xl w-auto font-bold">Tanggal di ubah</td>
+                        <td class="text-teal-800 text-2xl w-auto font-bold">{{$contents->updated_at}}</td>
+                    </tr>
+                    <tr class="align-top">
+                        <td class="text-teal-800 text-2xl w-auto font-bold">Dosen pembimbing</td>
+                        <td class="text-teal-800 text-2xl w-auto font-bold">{{$contents->name}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <p class="text-teal-800 text-5xl font-bold mt-32 mb-24 ">KATA KUNCI</p>
 
-        <div class="flex flex-row space-x-20 mb-80">
+        <div class="flex flex-row flex-wrap mb-80 w-100 gap-20 justify-center">
 
             @foreach ($arrayCategories as $data)
             <?php
@@ -112,47 +110,44 @@
         </div>
 
         <div class="w-full h-auto bg-teal-800 flex flex-col items-center py-4 pb-24 mb-64 justify-center">
-            <p class="text-white text-5xl text-center font-bold w-full mt-16 mb-16">Demo Tugas Akhir {{$contents->video_url}}</p>
+            <p class="text-white text-5xl text-center font-bold w-full mt-16 mb-16 text-wrap px-8">Demo Tugas Akhir {{$contents->video_url}}</p>
             <iframe class="w-full h-[50rem] px-40 " src="{{$contents->video_url}}"
                 frameborder="0"></iframe>
         </div>
 
         <div class="flex mb-64">
-            <div id="kontent1_kanan" class="relative bg-slate-200" style="width: 800px; height: 1000px;">
+            <div id="kontent1_kanan" class="relative bg-slate-200" style="width: 60vw; height: 1000px;">
                 <div class="z-10 absolute top-0 start-0 w-full h-full bg-white rounded-2xl shadow-2xl shadow-teal-800">
                     <embed class="bg-white w-full h-full overflow-hidden" src="{{asset('content/document/'.$contents->content_url)}}" type="">
                 </div>
 
-                <div
-                    class="absolute mt-[-70px] ms-[-65px] border-[6px] border-teal-800 w-80 h-56 rounded-2xl top-0 start-0">
+                <div class="absolute mt-[-70px] ms-[-40px] border-[6px] border-teal-800 w-[30vw] md:w-[20vw] h-56 rounded-2xl top-0 start-0">
                 </div>
                 <div class="absolute mt-[-100px] ms-[-10px] bg-teal-500 w-20 h-20 rounded-full top-0 start-0"></div>
-                <div
-                    class="absolute mb-[-60px] me-[-60px] border-[6px] border-teal-800 w-80 h-96 rounded-2xl bottom-0 end-0">
+                <div class="absolute mb-[-60px] me-[-40px] border-[6px] border-teal-800 w-[30vw] md:w-[20vw] h-96 rounded-2xl bottom-0 end-0">
                 </div>
                 <div class="absolute mb-[-20px] me-[-95px] bg-teal-500 w-20 h-20 rounded-full bottom-0 end-0"></div>
             </div>
         </div>
 
-        <div class="relative flex w-full h-auto px-64">
-            <p class="text-teal-800 text-5xl w-auto font-bold border-b-4 border-teal-800 mb-12 py-2">Rating dan Ulasan</p>
-            <!-- <div class="absolute top-14 start-0 border-b-2 w-full border-teal-800 z-20"></div> -->
+        <div class="relative flex w-[80vw] h-auto justify-center lg:justify-start">
+            <p class="text-teal-800 text-5xl w-auto font-bold border-b-4 border-teal-800 mb-24 py-2">Rating dan Ulasan</p>
         </div>
 
-        <div class="flex flex-row justify-center w-full px-64 mb-64">
+        <div class="flex flex-col-reverse lg:flex-row justify-center items-center w-[80vw]  mb-64 gap-20">
 
-            <div class="flex flex-col items-end me-20">
-                <div class="flex flex-row items-center space-x-4">
+            <div class="flex flex-col items-center lg:items-end">
+                <div class="flex flex-row items-center gap-8">
                     <p class="text-[6rem] text-teal-800 font-bold">2.4 K</p>
-                    <img class="w-20 h-20" src="Love.png" alt="">
+                    <img class="w-20 h-20" src="../Love.png" alt="">
                 </div>
                 <p class="text-2xl text-teal-800 font-bold">Sukai Tugas Akhir Ini</p>
             </div>
 
-            <div class="flex flex-col shadow-md shadow-slate-800">
+            <div class="flex flex-col shadow-md shadow-slate-800 w-[60vw]">
 
                 <div class="flex flex-col bg-white p-12">
-                    <div id="commenent" class="flex flex-col w-[40rem]">
+                    <div id="commenent" class="flex flex-col">
                         <div class="flex flex-row items-center">
                             <div class="flex flex-row w-12 h-12 items-center justify-center bg-slate-200 rounded-full me-4">
                                 <P class="text-3xl font-bold text-black">H</P>
@@ -160,14 +155,14 @@
                             <p class="text-xl font-bold text-black">Harry Styles</p>
                         </div>
                         <p class="text-xl font-bold text-slate-500 mt-4">16-Agustus-2023</p>
-                        <p class="text-xl font-bold text-slate-500 mt-4">Lorem ipsum dolor sit amet consectetur adipisicing
+                        <p class="text-xl font-bold text-slate-500 mt-4 text-wrap text-justify">Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. Nulla nobis soluta expedita ipsam qui minus quidem officia aut eveniet sapiente commodi
                             quo, ipsum reiciendis ex beatae excepturi dolor praesentium quod.</p>
                     </div>
                 </div>
 
                 <div class="flex flex-col bg-white p-12 shadow-md shadow-slate-800">
-                    <div id="commenent" class="flex flex-col w-[40rem]">
+                    <div id="commenent" class="flex flex-col">
                         <div class="flex flex-row items-center">
                             <div
                                 class="flex flex-row w-12 h-12 items-center justify-center bg-slate-200 rounded-full me-4">
@@ -176,7 +171,7 @@
                             <p class="text-xl font-bold text-black">Harry Styles</p>
                         </div>
                         <p class="text-xl font-bold text-slate-500 mt-4">16-Agustus-2023</p>
-                        <p class="text-xl font-bold text-slate-500 mt-4">Lorem ipsum dolor sit amet consectetur adipisicing
+                        <p class="text-xl font-bold text-slate-500 mt-4 text-wrap text-justify">Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. Nulla nobis soluta expedita ipsam qui minus quidem officia aut eveniet sapiente commodi
                             quo, ipsum reiciendis ex beatae excepturi dolor praesentium quod.</p>
                     </div>

@@ -1,9 +1,9 @@
 @extends('public.layout_baru.layouts')
 
 @section('content')
-    <div id="content_1" class="flex flex-row">
+    <div id="content_1" class="flex flex-col-reverse lg:flex-row items-center md:items-start gap-12 lg:gap-48">
 
-        <div id="kontent1_kiri" class="flex flex-col justify-center w-auto h-auto pt-24 pb-10 me-60 mb-80">
+        <div id="kontent1_kiri" class="flex flex-col justify-center w-auto h-auto pt-24 pb-1 mb-80">
             <p class="text-5xl text-teal-800 font-bold mb-12">{{$dosens->name}}</p>
             <p class="text-2xl text-teal-800 font-bold">NIKA</p>
             <p class="text-2xl text-teal-800 font-bold">123456789</p>
@@ -33,9 +33,9 @@
     <!-- GRID CONTENT -->
 
 
-    <p class="text-5xl text-teal-800 font-bold mb-24">Bidang Keahilian</p>
+    <p class="text-5xl text-teal-800 font-bold mb-24 text-center">Bidang Keahilian</p>
 
-    <div class="flex flex-row justify-center items-center mb-64 space-x-24">
+    <div class="flex flex-row flex-wrap justify-center items-center mb-64 gap-24">
 
         @foreach ( $arraySpecialities as $speciality )
         <div class="flex flex-col bg-teal-800 w-80 h-[27rem] pb-16 pt-16 rounded-xl items-center shadow-lg shadow-slate-500  hover:scale-105 transition-transform duration-300">
@@ -70,15 +70,15 @@
     <p class="text-5xl text-teal-800 font-bold mb-24">Tugas Akhir</p>
 
 
-    <div id="GRID_CONTENT" class="grid grid-cols-3 justify-center">
+    <div id="GRID_CONTENT" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 m-12 items-start max-w-[1280px]">
 
 
         <?php $counter = 0; ?>
         @foreach ($contents as $content)
             <button onclick="window.location.href='{{route('public.TA', $content->id)}}'" >
-                <div id="item_content" class="flex flex-col w-auto h-auto mb-20 me-14 shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300" >
+                <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300" >
 
-                    <div class="flex flex-col bg-teal-800 rounded-xl px-6" style="width: 450px; height:800px;">
+                    <div class="flex flex-col bg-teal-800 rounded-xl px-6 max-w-[400px] h-[800px]">
                         <!-- THUMBNAIL KONTEN -->
                         <img class="pt-6 rounded-xl w-[400px] h-[300px]"
                             src="{{ asset('content/content_image/thumbnail/' . $content->thumbnail_image_url) }}"
@@ -103,10 +103,12 @@
                     </div>
 
                     <div class="mt-[-15px] h-20 bg-white rounded-xl border-2 border-teal-800 flex flex-row items-center px-6"
-                        style="width: 450px;">
-                        <img class="w-9" src="{{asset('asset/lecturer/Love.png')}}" alt="">
-                        <p id="like" class="ms-4 text-xl text-teal-800 font-bold" name="like"> 2.4 K</p>
-                        <div class="flex flex-row ms-52">
+                        style="width: 100%;">
+                        <div class="flex flex-1">
+                            <img class="w-9" src="{{asset('asset/Love.png')}}" alt="">
+                            <p id="like" class="ms-4 text-xl text-teal-800 font-bold" name="like">2.4K</p>
+                        </div>
+                        <div class="flex flex-1 flex-row justify-end">
                             <img class="w-9 me-4" src="{{asset('asset/lecturer/Bookmark.png')}}" alt="">
                             <img class="w-8" src="{{asset('asset/lecturer/share.png')}}" alt="">
                         </div>

@@ -8,8 +8,8 @@
     @endif
 
     <div id="searc_container" class="flex flex-col items-center">
-        <p class="text-4xl text-teal-800 font-bold mb-2">Topik Tugas Akhir</p>
-        <p class="text-4xl text-teal-800 font-bold mb-10">Teknologi Rekayasa Perangkat Lunak</p>
+        <p class="text-4xl text-wrap text-teal-800 font-bold mb-2 mx-24 text-center">Topik Tugas Akhir</p>
+        <p class="text-4xl text-wrap text-teal-800 font-bold mb-10 mx-24 text-center">Teknologi Rekayasa Perangkat Lunak</p>
 
         <div id="search_bar" class="flex items-center">
             <div class="bg-teal-500 rounded-full w-20 h-20 z-10 flex justify-center items-center shadow-lg shadow-slate-700">
@@ -17,9 +17,8 @@
                     <img class="w-10 h-auto" src="{{asset('asset/search.png')}}" alt="">
                 </button>
             </div>
-            <input type="text" placeholder="Cari portofolio Tugas Akhir di sini..."
-                class="z-0 h-16 ms-[-30px] ps-16 text-lg bg-teal-800 rounded-xl text-white font-bold shadow-lg shadow-slate-700"
-                style="width: 600px;">
+            <input type="text" placeholder="Cari portofolio TA..."
+                class="z-0 h-16 ms-[-30px] ps-10 text-lg bg-teal-800 rounded-xl text-white font-bold shadow-lg shadow-slate-700 w-[300px] lg:w-[600px]">
         </div>
     </div>
 
@@ -86,7 +85,7 @@
                     </div>
                     <!-- Slide 2 -->
                     <div id="content" class="w-full flex-shrink-0">
-                        <div id="container_tag" class="flex mt-48 space-x-16 w-100 h-80">
+                        <div id="container_tag" class="flex mt-48 space-x-16 w-auto h-80">
 
                             <div id="item_tag" class="flex flex-col">
                                 <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Data Science'])}}'">
@@ -142,7 +141,7 @@
                     </div>
                     <!-- Slide 3 -->
                     <div id="content" class="w-full flex-shrink-0">
-                        <div id="container_tag" class="flex mt-48 space-x-16 w-100 h-80">
+                        <div id="container_tag" class="flex mt-48 space-x-16 w-auto h-80">
 
                             <div id="item_tag" class="flex flex-col">
                                 <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Blockchain Technology and Digital Finance'])}}'">
@@ -210,12 +209,12 @@
     </div>
 
 
-    <div class="flex w-full justify-start items-center mb-20 mt-[-60px]">
-        <p class="text-lg text-teal-800 font-bold me-12 ms-32">Urutkan Berdasarkan</p>
+    <div class="flex flex-col md:flex-row w-full justify-start md:items-center ms-24 items-start mb-20 mt-[-60px] gap-4 md:gap-12">
+        <p class="text-lg text-teal-800 font-bold md:ms-24">Urutkan Berdasarkan</p>
 
         <div>
             <select id="role" name="role" aria-placeholder="Pilih Urutan"
-                class="w-full rounded p-2 pe-20 text-teal-800 font-bold bg-white border-teal-800 border-4">
+                class="w-[200px] rounded p-2 text-teal-800 font-bold bg-white border-teal-800 border-4">
                 <option class="text-teal-800 font-bold p-4 px-6" value="Admin">Pilih Urutan</option>
                 <option class="text-teal-800 font-bold p-4 px-6" value="Admin">Tanggal Upload</option>
                 <option class="text-teal-800 font-bold p-4 px-6" value="Dosen">Like</option>
@@ -230,14 +229,14 @@
 
     <!-- GRID CONTENT -->
 
-    <div id="GRID_CONTENT" class="grid grid-cols-3 justify-center">
+    <div id="GRID_CONTENT" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 m-12 items-start max-w-[1280px]">
 
         <?php $counter = 0; ?>
         @foreach ($contents as $content)
             <button type="button" onclick="window.location.href='{{route('public.TA', $content->id)}}'">
-                <div id="item_content" class="flex flex-col w-auto h-auto mb-20 me-14 shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
+                <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
-                    <div class="flex flex-col bg-teal-800 pb-12 rounded-xl px-6" style="width: 450px; height:800px;">
+                    <div class="flex flex-col bg-teal-800 pb-12 rounded-xl px-6 max-w-400px h-[700px]">
                         <!-- THUMBNAIL KONTEN -->
                         <img class="pt-6 rounded-xl w-[400px] h-[300px]"
                             src="{{ asset('content/content_image/thumbnail/' . $content->thumbnail_image_url) }}"
@@ -260,10 +259,12 @@
                     </div>
 
                     <div class="mt-[-15px] h-20 bg-white rounded-xl border-2 border-teal-800 flex flex-row items-center px-6"
-                        style="width: 450px;">
-                        <img class="w-9" src="{{asset('asset/Love.png')}}" alt="">
-                        <p id="like" class="ms-4 text-xl text-teal-800 font-bold" name="like">2.4K</p>
-                        <div class="flex flex-row ms-52">
+                        style="width: 100%;">
+                        <div class="flex flex-1">
+                            <img class="w-9" src="{{asset('asset/Love.png')}}" alt="">
+                            <p id="like" class="ms-4 text-xl text-teal-800 font-bold" name="like">2.4K</p>
+                        </div>
+                        <div class="flex flex-1 flex-row justify-end">
                             <img class="w-9 me-4" src="{{asset('asset/Bookmark.png')}}" alt="">
                             <img class="w-8" src="{{asset('asset/share.png')}}" alt="">
                         </div>

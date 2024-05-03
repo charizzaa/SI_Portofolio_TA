@@ -21,8 +21,8 @@
     </div>
 
 
-    <div id="konten_2" class="flex flex-row justify-center w-auto h-auto mt-32 mb-24">
-        <div id="2_kiri" class="flex flex-col basis-2/3 ps-32 px-24 mt-20">
+    <div id="konten_2" class="flex flex-col md:flex-row justify-center align-midle w-auto h-auto mt-32 mb-24 ps-32 px-24 space-x-8">
+        <div id="2_kiri" class="flex flex-col basis-2/3 mt-20">
             <p class="w-full text-5xl text-teal-800 font-bold mb-20 text-center">Berita Terkini</p>
             <img class="w-full h-auto mb-12" src="{{ asset('asset/dashboard/berita_kiri.png') }}" alt="">
             <p class="w-full text-3xl text-teal-800 font-bold mb-16">Evolusi Desain UI/UX: Menapaki Jejak Inovasi dan
@@ -37,7 +37,7 @@
             <p class="w-full text-2xl text-teal-800 font-bold">23 September 2023, 11.45 WIB</p>
         </div>
 
-        <div id="2_kiri" class="flex flex-col basis-1/3 justify-center items-center pe-32">
+        <div id="2_kiri" class="flex flex-col basis-1/3 justify-center items-center">
             <div class="w-full h-auto bg-teal-800 rounded-2xl shadow-slate-500 shadow-lg">
                 <div class="flex flex-col w-auto h-auto p-12">
                     <div class="flex flex-col mb-20">
@@ -88,139 +88,51 @@
         </button>
     </div>
 
-
-    <div class="flex flex-col w-full h-auto mb-60">
-
-        <div class="w-auto h-auto bg-slate-600">
-            <div id="kontainer_1" class="relative w-full h-auto bg-slate-200">
-                <svg class="absolute z-0 start-0 top-0" xmlns="http://www.w3.org/2000/svg" width="100%" height="243"
-                    viewBox="0 0 1728 243" fill="none">
-                    <g filter="url(#filter0_d_693_698)">
-                        <path
-                            d="M-835 12.7258C-835 12.7258 -491.779 135.251 -230.425 134.804C0.846619 134.408 56.2465 20.158 287.245 12.7256C537.175 4.68403 754.193 65.5812 1001.25 91.7765C1210.87 114.001 1226.01 84.5598 1429.34 44.246C1560.79 18.184 1888 12.7258 1888 12.7258V217.5L-853 239L-835 12.7258Z"
-                            fill="#2D918C" />
-                    </g>
-                    <defs>
-                        <filter id="filter0_d_693_698" x="-857" y="0" width="2757" height="243"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feColorMatrix in="SourceAlpha" type="matrix"
-                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                            <feOffset dx="4" dy="-4" />
-                            <feGaussianBlur stdDeviation="4" />
-                            <feComposite in2="hardAlpha" operator="out" />
-                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.47 0" />
-                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_693_698" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_693_698" result="shape" />
-                        </filter>
-                    </defs>
-                </svg>
-
-                <svg class="absolute z-10 start-0 top-0" xmlns="http://www.w3.org/2000/svg" width="100%"
-                    height="300" viewBox="0 0 1728 195" fill="none">
-                    <g filter="url(#filter0_d_693_699)">
-                        <path
-                            d="M-30 14C-30 14 248.524 101.447 421 101C573.624 100.605 653.056 38.4277 805.5 31C970.437 22.9636 1092.46 49.8215 1255.5 76C1393.83 98.2102 1507.32 116.288 1641.5 76C1728.25 49.9548 1767 14 1767 14V189H-12L-30 14Z"
-                            fill="#025E5A" />
-                    </g>
-                    <defs>
-                        <filter id="filter0_d_693_699" x="-36" y="0" width="1817" height="195"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                            <feColorMatrix in="SourceAlpha" type="matrix"
-                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                            <feOffset dx="4" dy="-4" />
-                            <feGaussianBlur stdDeviation="5" />
-                            <feComposite in2="hardAlpha" operator="out" />
-                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.37 0" />
-                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_693_699" />
-                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_693_699"
-                                result="shape" />
-                        </filter>
-                    </defs>
-                </svg>
+    <svg width="100vw" height="auto" viewBox="0 0 300 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_307_215)">
+            <path d="M-144.965 2.20943C-144.965 2.20943 -85.3779 23.4812 -40.0039 23.4036C0.147415 23.3348 9.76545 3.49974 49.8694 2.2094C93.26 0.81329 130.937 11.3857 173.829 15.9335C210.221 19.7919 212.849 14.6806 248.15 7.68169C291.5 -4 327.778 2.20943 327.778 2.20943V41.4931H-148.09L-144.965 2.20943Z" fill="#2D918C"/>
+            <path d="M0 13C0 13 46.4982 27.5988 75.2922 27.5242C100.772 27.4583 114.033 17.0781 139.482 15.8381C167.018 14.4964 187.389 18.9802 214.608 23.3506C237.701 27.0585 256.648 30.0765 279.048 23.3506C293.531 19.0025 300 13 300 13V42.2154H0V13Z" fill="#025E5A"/>
+        </g>
+        <defs>
+            <clipPath id="clip0_307_215">
+                <rect width="300" height="42.1875" fill="white"/>
+            </clipPath>
+        </defs>
+    </svg>
 
 
-                <!-- <div class="absolute w-full h-full bg-slate-200 start-0">
-                                                            <div class="w-full flex flex-row bg-teal-800 justify-center items-center py-12">
-                                                                <p class="text-5xl text-white font-bold text-center">Topik Tugas Akhir<br>
-                                                                    Teknologi Rekayasa Perangkat Lunak</p>
-                                                            </div>
-                                                        </div> -->
-
-            </div>
-        </div>
-    </div>
-
-    <div class="w-full flex flex-row bg-teal-800 justify-center items-center py-12">
-        <p class="text-5xl text-white font-bold text-center">Topik Tugas Akhir<br>
+    <div class="w-full flex flex-row bg-teal-800 justify-center items-center py-12 my-[-25px]">
+        <p class="text-5xl text-white font-bold text-center">Topik Tugas Akhir<br><br>
             Teknologi Rekayasa Perangkat Lunak</p>
     </div>
 
 
-    <div class="flex w-full h-auto mb-80 mt-[-80px]">
-        <div class="relative w-full h-auto">
-            <svg class="absolute z-10 start-0 top-0" xmlns="http://www.w3.org/2000/svg" width="100%" height="350"
-                viewBox="0 0 1728 256" fill="none">
-                <g filter="url(#filter0_d_693_702)">
-                    <path
-                        d="M1782 201C1782 201 1504.64 148.422 1284.18 148.869C1089.09 149.265 931.894 217.572 737.034 225C526.203 233.036 370.234 206.178 161.823 180C-14.996 157.79 -160.061 139.712 -331.58 180C-442.464 206.045 -492 242 -492 242V6.5L1782 33.5V201Z"
-                        fill="#025E5A" />
-                </g>
-                <defs>
-                    <filter id="filter0_d_693_702" x="-498" y="0.5" width="2294" height="255.5"
-                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                            result="hardAlpha" />
-                        <feOffset dx="4" dy="4" />
-                        <feGaussianBlur stdDeviation="5" />
-                        <feComposite in2="hardAlpha" operator="out" />
-                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.37 0" />
-                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_693_702" />
-                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_693_702" result="shape" />
-                    </filter>
-                </defs>
-            </svg>
-
-            <svg class="absolute z-0" xmlns="http://www.w3.org/2000/svg" width="100%" height="420"
-                viewBox="0 0 1728 259" fill="none">
-                <g filter="url(#filter0_d_693_701)">
-                    <path
-                        d="M2389 246.274C2389 246.274 2045.78 123.749 1784.43 124.196C1553.15 124.592 1497.75 238.842 1266.76 246.274C1016.83 254.316 799.808 193.419 552.746 167.224C343.135 144.999 327.99 174.44 124.661 214.754C-6.78596 240.816 -334 246.274 -334 246.274L-317 4L2361.72 4L2389 246.274Z"
-                        fill="#2D918C" />
-                </g>
-                <defs>
-                    <filter id="filter0_d_693_701" x="-338" y="0" width="2739" height="259"
-                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                            result="hardAlpha" />
-                        <feOffset dx="4" dy="4" />
-                        <feGaussianBlur stdDeviation="4" />
-                        <feComposite in2="hardAlpha" operator="out" />
-                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.47 0" />
-                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_693_701" />
-                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_693_701" result="shape" />
-                    </filter>
-                </defs>
-            </svg>
-        </div>
-    </div>
+    <svg width="100vw" height="auto" viewBox="0 0 300 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_306_237)">
+            <path d="M415 42.8716C415 42.8716 355.381 21.1902 309.983 21.2693C269.808 21.3394 260.185 41.5565 220.061 42.8716C176.647 44.2947 138.949 33.5186 96.0326 28.8833C59.622 24.9505 56.9913 30.1602 21.6719 37.294C-1.16113 41.9058 -58 42.8716 -58 42.8716L-55.047 0H410.261L415 42.8716Z" fill="#2D918C"/>
+            <path d="M300 25.6596C300 25.6596 260 30 231.5 20.5C206 14 185.5 3.5 139 20.5C99 40 89 35.5 73.5 31C58 26.5 43.7914 17.5741 21.1636 22.8892C6.5351 26.3252 0 31.0686 0 31.0686V0H65.6685H300V25.6596Z" fill="#025E5A"/>
+        </g>
+        <defs>
+            <clipPath id="clip0_306_237">
+                <rect width="300" height="44.9653" fill="white"/>
+            </clipPath>
+        </defs>
+    </svg>
 
 
-    <div class="mt-[-100px] mx-auto mb-2 pt-8" style="max-width: 940px;">
+
+    <div class="mt-[-100px] mx-auto mb-2 pt-8 w-full md:w-auto" style="max-width: 940px;">
 
         <div class="relative">
 
-            <div class="flex w-full h-fit mt-64 ">
+            <div class="flex h-fit mt-64 mx-20">
 
                 <!-- Carousel Container -->
                 <div class="overflow-hidden w-full h-fit rounded-lg mx-20">
 
                     <!-- Slides Container -->
                     <div id="slides"
-                        class="flex py-12 mb-16 items-end transition-all ease-in-out duration-300 translate-x-[280px]">
+                        class="flex py-4 mb-16 items-end transition-all ease-in-out duration-300 translate-x-[40px]">
 
                         <!-- Slide 1 -->
 
@@ -267,7 +179,7 @@
                         </div>
 
                         <div id="item"
-                            class="item3w-64 flex flex-col h-fit justify-center shadow-lg shadow-slate-700">
+                            class="item3 w-64 flex flex-col h-fit justify-center shadow-lg shadow-slate-700">
 
                             <button
                                 onclick="window.location.href='{{ route('public.portofolio', ['category' => 'Data Science']) }}'">
@@ -420,21 +332,10 @@
 
 
     <div class="w-full flex justify-center items-center bg-teal-800 pt-40 pb-12 text-center text-5xl text-white font-bold">
-        Tentang Tugas Akhir<br>Teknologi Rekayasa Perangkat Lunak
+        Tentang Tugas Akhir<br><br>Teknologi Rekayasa Perangkat Lunak
     </div>
-    <div class="flex flex-col w-full bg-teal pb-40 justify-center items-center bg-teal-800 mb-40">
-        <div class="flex flex-row items-center justify-center mt-12">
-
-            <div class="flex flex-col items-end me-32">
-                <p class="text-4xl text-white font-bold text-end mb-10">Tim Tugas Akhir</p>
-                <p class="text-xl text-white font-bold  text-end mb-10">Tim pembentuk dan pengembang Tugas Akhir <br>
-                    Teknologi Rekayasa Perangkat Lunak</p>
-                <button onclick="window.location.href='{{ route('public.team') }}'"
-                    class="flex items-center justify-center w-auto h-auto ps-12 pe-8 py-4 bg-white hover:bg-slate-300 rounded-xl">
-                    <p class="text-teal-800 font-bold text-center text-xl">Read More</p>
-                    <img class="ms-6 w-12 h-auto" src="{{ asset('asset/dashboard/button_g.png') }}" alt="">
-                </button>
-            </div>
+    <div class="flex flex-col w-full bg-teal pb-40 justify-center items-center bg-teal-800 mb-40 px-40">
+        <div class="flex flex-col md:flex-row-reverse items-center justify-center mt-12 gap-20">
 
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="502" height="408" viewBox="0 0 502 408"
@@ -1698,12 +1599,25 @@
                         fill="#455A64" />
                 </svg>
             </div>
+
+            <div class="flex flex-col items-start md: items-end">
+                <p class="text-4xl text-white font-bold text-end mb-10">Tim Tugas Akhir</p>
+                <p class="text-xl text-white font  text-end mb-10">Tim pembentuk dan pengembang Tugas Akhir <br>
+                    Teknologi Rekayasa Perangkat Lunak</p>
+                <button onclick="window.location.href='{{ route('public.team') }}'"
+                    class="flex items-center justify-center w-auto h-auto ps-12 pe-8 py-4 bg-white hover:bg-slate-300 rounded-xl">
+                    <p class="text-teal-800 font-bold text-center text-xl">Read More</p>
+                    <img class="ms-6 w-12 h-auto" src="{{ asset('asset/dashboard/button_g.png') }}" alt="">
+                </button>
+            </div>
+
+            
         </div>
 
-        <div class="flex flex-row items-center justify-center mt-20">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-20 mt-20">
 
 
-            <div class="me-32">
+            <div class="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="502" height="408" viewBox="0 0 502 408"
                     fill="none">
                     <rect width="502" height="408" rx="10" fill="white" />
@@ -3601,7 +3515,7 @@
 
             <div class="flex flex-col items-start">
                 <p class="text-4xl text-white font-bold text-start mb-10">Portofolio Tugas Akhir</p>
-                <p class="text-xl text-white font-bold  text-start mb-10">Tugas Akhir yang dikembangkan oleh mahasiswa
+                <p class="text-xl text-white font  text-start mb-10">Tugas Akhir yang dikembangkan oleh mahasiswa
                     <br>
                     Teknologi Rekayasa Perangkat Lunak sebagai <br> syarat kelulusan
                 </p>
@@ -3618,14 +3532,14 @@
 
     <div class="flex flex-col w-full justify-center items-center">
 
-        <p class="text-5xl text-teal-800 font-bold text-start mb-32">Prestasi Teknologi Rekayasa Perangkat Lunak</p>
+        <p class="text-5xl text-teal-800 font-bold text-start mb-32 px-20">Prestasi Teknologi Rekayasa Perangkat Lunak</p>
 
-        <div class="flex flex-row w-full justify-start items-center mb-40">
+        <div class="flex flex-col md:flex-row w-full justify-start items-center mb-40 gap-20">
 
-            <div class="basis-1/2 flex flex-col w-auto h-auto px-48 pe-56 py-28 bg-teal-800 shadow-xl shadow-slate-500"
+            <div class="basis-1/2 flex flex-col w-auto h-auto px-24 pe-32 py-28 bg-teal-800 shadow-xl shadow-slate-500"
                 style="border-top-right-radius: 999px; border-bottom-right-radius: 999px;">
                 <p class="text-4xl text-white font-bold text-start mb-12">PIMNAS</p>
-                <p class="text-xl text-white font-bold text-start mb-12">Pekan Ilmiah Mahasiswa Nasional (PIMNAS) <br>
+                <p class="text-xl text-white text-start mb-12">Pekan Ilmiah Mahasiswa Nasional (PIMNAS) <br>
                     merupakan event resmi tahunan Pusat Prestasi <br> Nasional, Kementerian Pendidikan dan <br> Kebudayaan
                     dalam bidang penalaran untuk <br> memperlombakan karya ilmiah mahasiswa <br> tingkat nasional.</p>
                 <button type="button"
@@ -3647,12 +3561,12 @@
         </div>
 
 
-        <div class="flex flex-row-reverse w-full justify-start items-center mb-40">
+        <div class="flex flex-col md:flex-row-reverse w-full justify-start items-center mb-40 gap-20">
 
-            <div class="basis-1/2 flex flex-col items-end w-auto h-auto px-48 pe-56 py-28 bg-teal-800 shadow-xl shadow-slate-500"
+            <div class="basis-1/2 flex flex-col items-end w-auto h-auto px-32 pe-24 py-28 bg-teal-800 shadow-xl shadow-slate-500"
                 style="border-top-left-radius: 999px; border-bottom-left-radius: 999px;">
                 <p class="text-4xl text-white font-bold text-end mb-12">PKM</p>
-                <p class="text-xl text-white font-bold text-end mb-12">Program Kreativitas Mahasiswa adalah kegiatan untuk
+                <p class="text-xl text-white text-end mb-12">Program Kreativitas Mahasiswa adalah kegiatan untuk
                     meningkatkan mutu mahasiswa agar kelak dapat menjadi anggota masyarakat yang memiliki kemampuan akademis
                     dan/atau profesional yang dapat menerapkan, mengembangkan dan meyebarluaskan ilmu pengetahuan, teknologi
                     dan/atau kesenian serta memperkaya budaya nasional.</p>
@@ -3674,12 +3588,12 @@
         </div>
 
 
-        <div class="flex flex-row w-full justify-start items-center mb-72">
+        <div class="flex flex-col md:flex-row w-full justify-start items-center mb-72 gap-20">
 
-            <div class="basis-1/2 flex flex-col w-auto h-auto px-48 pe-56 py-28 bg-teal-800 shadow-xl shadow-slate-500"
+            <div class="basis-1/2 flex flex-col w-auto h-auto px-24 pe-56 py-24 bg-teal-800 shadow-xl shadow-slate-500"
                 style="border-top-right-radius: 999px; border-bottom-right-radius: 999px;">
                 <p class="text-4xl text-white font-bold text-start mb-12">GEMASTIK</p>
-                <p class="text-xl text-white font-bold text-start mb-12">GEMASTIK atau Pagelaran Mahasiswa Nasional Bidang
+                <p class="text-xl text-white text-start mb-12">GEMASTIK atau Pagelaran Mahasiswa Nasional Bidang
                     Teknologi Informasi dan Komunikasi, merupakan program Balai Pengembangan Talenta Indonesia, Pusat
                     Prestasi Nasional, Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. </p>
                 <button class="flex w-fit h-fit px-12 items-center py-4 bg-white hover:bg-slate-300 rounded-md">

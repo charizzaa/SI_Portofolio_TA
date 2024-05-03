@@ -19,17 +19,17 @@
             </div>
             <div class="flex flex-col justify-start mt-52 w-1/2">
                 <div class="flex flex-col justify-start space-y-4">
-                    <h1 class="flex font-bold text-5xl text-[#025E5A]">Forgot</h1>
-                    <h1 class="flex font-bold text-5xl text-[#025E5A]">Password?</h1>
+                    <h1 class="flex font-bold text-5xl text-[#025E5A]">Lupa</h1>
+                    <h1 class="flex font-bold text-5xl text-[#025E5A]">Kata Sandi?</h1>
                 </div>
                 <div class="flex flex-col justify-start mt-12">
-                    <p class="font-semibold text-lg">Enter your email address associated with your account</p>
+                    <p class="font-semibold text-lg">Masukkan alamat email terkait</p>
                     <div class="mt-4">
-                        <input for="email" name="email" id="email" placeholder="Email" class="w-3/5 p-2 border border-gray-300 rounded" required>
+                        <input for="email" name="email" id="email" placeholder="Masukkan email" class="w-3/5 p-2 border border-gray-300 rounded" required>
                     </div> 
                 </div>
                 <div class="flex group justify-start mt-8">
-                    <button type="submit" class="w-fit bg-[#025E5A] text-white font-semibold py-2 px-6 rounded-full group-hover:bg-[#2D918C]">Next</button>
+                    <button type="submit" class="w-fit bg-[#025E5A] text-white font-semibold py-2 px-6 rounded-full group-hover:bg-[#2D918C]">Selanjutnya</button>
                 </div>
             </div>
         </div>

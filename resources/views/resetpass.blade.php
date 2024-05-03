@@ -22,22 +22,22 @@
             </div>
             <div class="flex flex-col justify-start mt-20 w-1/2">
                 <div class="flex flex-col justify-start space-y-4">
-                    <h1 class="flex font-bold text-5xl text-[#025E5A]">Reset Password</h1>
+                    <h1 class="flex font-bold text-5xl text-[#025E5A]">Atur Ulang <br> Kata Sandi</h1>
                 </div>
                 <div class="flex flex-col justify-start mt-12">
-                    <p class="font-semibold text-lg">Enter your new password</p>
+                    <p class="font-semibold text-lg">Kata Sandi Baru</p>
                     <div class="mt-4">
-                        <input type="password" name="password" id="password" placeholder="Enter new password" class="w-1/2 p-2 border border-gray-300 rounded" required>
+                        <input type="password" name="password" id="password" placeholder="Masukkan kata sandi baru" class="w-1/2 p-2 border border-gray-300 rounded" required>
                     </div> 
                 </div>
                 <div class="flex flex-col justify-start mt-6">
-                    <p class="font-semibold text-lg">Confirm new password</p>
+                    <p class="font-semibold text-lg">Konfirmasi kata sandi</p>
                     <div class="mt-4">
-                        <input type="password" name="password" id="password" placeholder="Confirm new password" class="w-1/2 p-2 border border-gray-300 rounded" required>
+                        <input type="password" name="password" id="password" placeholder="Konfirmasi kata sandi baru" class="w-1/2 p-2 border border-gray-300 rounded" required>
                     </div> 
                 </div>
                 <div class="flex flex-col justify-start mt-10">
-                    <p class="font-semibold text-lg">To continue, type the characters you see in the picture</p>
+                    <p class="font-semibold text-lg">Isi Kode Captcha dengan Benar</p>
                     <div class="w-3/5">
                         <div class="bg-white rounded-md shadow-md p-4">
                            <div class="flex items-center justify-between mb-4">
@@ -51,14 +51,14 @@
                                 </div>
                            </div>
                            <div class="flex items-center justify-between">
-                             <input type="text" name="captcha" id="captcha" placeholder="Enter the text you see on the image" class="border-2 border-gray-200 p-2 rounded-md w-full">
+                             <input type="text" name="captcha" id="captcha" placeholder="Masukkan teks yang ada pada gambar" class="border-2 border-gray-200 p-2 rounded-md w-full">
                              <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-4">Submit</button>
                            </div>
                         </div>
                        </div>
                 </div>
                 <div class="flex group justify-start mt-8">
-                    <button type="submit" class="w-fit bg-[#025E5A] text-white font-semibold py-2 px-6 rounded-full group-hover:bg-[#2D918C]">Next</button>
+                    <button type="submit" class="w-fit bg-[#025E5A] text-white font-semibold py-2 px-6 rounded-full group-hover:bg-[#2D918C]">Selanjutnya</button>
                 </div>
             </div>
         </div>
