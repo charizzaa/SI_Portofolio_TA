@@ -139,7 +139,7 @@
             <div class="flex flex-col items-center lg:items-end">
                 <div class="flex flex-row items-center gap-8">
                     <p class="text-[6rem] text-teal-800 font-bold">2.4 K</p>
-                    <img class="w-20 h-20" src="../Love.png" alt="">
+                    <img class="w-20 h-20" src={{ asset('asset/Love.png')}} alt="">
                 </div>
                 <p class="text-2xl text-teal-800 font-bold">Sukai Tugas Akhir Ini</p>
             </div>
