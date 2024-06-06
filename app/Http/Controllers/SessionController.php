@@ -8,55 +8,57 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class SessionController extends Controller
 {
-  public function index(){
+
+
+  protected $redirectTo = '/';
+
+  public function index()
+  {
     return view('public.login');
   }
 
-  public function login(Request $request){
+  public function login(Request $request)
+  {
+    try {
+      $response = Http::post('http://127.0.0.1:8080/api/login', [
+        'email' => $request->email,
+        'password' => $request->password,
+      ]);
 
-    // $request->session()->flash('email', $request->email);
-    $request->validate([
-        'email' => 'required',
-        'password' => 'required'
-    ],[
-        'email.required' => 'Email wajib diisi',
-        'password.required' => 'password wajib diisi',
-    ]);
+      if ($response->successful()) {
+        $token = $response->json('token'); // Adjust the key according to the actual response structure
 
-    $infologin=[
-        'email'=>$request->email,
-        'password'=>$request->password
-    ];
-
-    // $datauser = Auth::user();
-
-    $datauser = Auth::user();
-
-    
-    if(Auth::attempt($infologin)){
-        // dd(Auth::user()->id);
-        $users = User::find(Auth::user()->id);
-        $users->update([
-            'loginstatus' => 'on',
-            'last_login' => Carbon::now()
-        ]);
-        if(Auth::user()->role == "Admin"){
-        return redirect()->route('admin.dashboard.member')->with('datauser', $datauser);
-        }else{
-            return redirect()->route('admin.dashboard.porto')->with('datauser', $datauser);
+        if ($token) {
+          // Save the token in the session
+          session(['api_token' => $token]);
+          session(['user' => $response->json('user')]);
+          return redirect()->route('public.dashboard');
+        } else {
+          // Handle the case where the token is not found in the response
+          return back()->withErrors(['message' => 'Token not found in the response']);
         }
-    }else{
-        return redirect()->route('login')->withErrors('username atau email tidak valid.');
+      } else {
+        // Handle the error with a more descriptive message
+        $errorMessage = $response->json('message') ?? 'Unknown error';
+        return back()->withErrors(['message' => 'Error fetching data: ' . $errorMessage]);
+      }
+    } catch (\Exception $e) {
+      // Log the exception message
+      \Log::error('Login error: ' . $e->getMessage());
+      return back()->withErrors(['message' => 'An error occurred while attempting to log in.']);
     }
   }
 
-  public function logout(){
+
+  public function logout()
+  {
     $users = User::find(Auth::user()->id);
     $users->update([
-        'loginstatus' => 'off',
+      'loginstatus' => 'off',
     ]);
 
     Auth::logout();

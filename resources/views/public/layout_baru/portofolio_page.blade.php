@@ -35,7 +35,7 @@
                     <div id="container_tag" class="flex mt-48 space-x-16 w-100 h-80 me-8">
 
                         <div id="item_tag" class="flex flex-col">
-                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Artificial Intelligence'])}}'">
+                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Artificial Intelligence and Natural Language Processing'])}}'">
 
                             <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
                                 <p class="text-white text-xl pt-14 text-left ms-20 font-bold">Artificial
@@ -67,7 +67,7 @@
                         </div>
 
                         <div id="item_tag" class="flex flex-col">
-                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Software Engineering'])}}'">
+                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Intelligent Gaming'])}}'">
 
                             <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
                                 <p class="text-white text-xl pt-14 text-left ms-20 font-bold">Intelligent Gaming</p>
@@ -218,7 +218,6 @@
                 <option class="text-teal-800 font-bold p-4 px-6" value="Admin">Pilih Urutan</option>
                 <option class="text-teal-800 font-bold p-4 px-6" value="Admin">Tanggal Upload</option>
                 <option class="text-teal-800 font-bold p-4 px-6" value="Dosen">Like</option>
-                <option class="text-teal-800 font-bold p-4 px-6" value="Dosen">Like</option>
             </select>
         </div>
 
@@ -233,24 +232,24 @@
 
         <?php $counter = 0; ?>
         @foreach ($contents as $content)
-            <button type="button" onclick="window.location.href='{{route('public.TA', $content->id)}}'">
+            <button type="button" onclick="window.location.href='{ {route('public.TA', $content['id']) }}'">
                 <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
                     <div class="flex flex-col bg-teal-800 pb-12 rounded-xl px-6 max-w-400px h-[700px]">
                         <!-- THUMBNAIL KONTEN -->
                         <img class="pt-6 rounded-xl w-[400px] h-[300px]"
-                            src="{{ asset('content/content_image/thumbnail/' . $content->thumbnail_image_url) }}"
+                            src="{{ asset('content/content_image/thumbnail/' . $content['thumbnail_image_url']) }}"
                             alt="">
 
                         <!-- DESKRIPSI KONTEN -->
 
-                        <p class="text-lg text-white font-bold mt-6 mb-[-15px] text-left">{{ $content->tittle }}</p>
+                        <p class="text-lg text-white font-bold mt-6 mb-[-15px] text-left">{{ $content['tittle'] }}</p>
                         <div class="h-32 mt-2">
-                            <p class="text-sm text-white mt-6 text-left">{{$content->description}}</p>
+                            <p class="text-sm text-white mt-6 text-left">{{$content['description']}}</p>
                         </div>
-                        <p class="text-lg text-white mt-2 font-bold text-left">{{$content->name}}</p>
-
-                        @foreach ($arrayCategories[$counter] as $data)
+                        <p class="text-lg text-white mt-2 font-bold text-left">{{$content['first_name'] }} {{$content['last_name'] }}</p>
+                       @php $tags = json_decode($content['tags'], true) ?? []; @endphp
+                        @foreach ($tags as $data)
                             <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
                                 <p class="text-teal-800 text-sm font-bold text-left">{{ $data }}</p>
                             </div>

@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>@yield('title', 'Default Title')</title>
     <style>
         body {
@@ -58,19 +59,14 @@
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
                 </svg>
             </div> -->
-        <svg class="wave_1" xmlns="http://www.w3.org/2000/svg" width="750" height="534" viewBox="0 0 789 562"
-            fill="none">
+        <svg class="wave_1" xmlns="http://www.w3.org/2000/svg" width="750" height="534" viewBox="0 0 789 562" fill="none">
             <g filter="url(#filter0_d_1051_3512)">
-                <path
-                    d="M0 0.307474H776.943C776.943 0.307474 782.001 -10.7374 696.828 99.567C611.654 209.872 512.882 156.089 410.382 225.543C310.121 293.48 285.706 391.736 186.802 462.427C91.497 530.544 0 550 0 550V0.307474Z"
-                    fill="#2D918C" fill-opacity="0.67" shape-rendering="crispEdges" />
+                <path d="M0 0.307474H776.943C776.943 0.307474 782.001 -10.7374 696.828 99.567C611.654 209.872 512.882 156.089 410.382 225.543C310.121 293.48 285.706 391.736 186.802 462.427C91.497 530.544 0 550 0 550V0.307474Z" fill="#2D918C" fill-opacity="0.67" shape-rendering="crispEdges" />
             </g>
             <defs>
-                <filter id="filter0_d_1051_3512" x="-4" y="-4" width="793" height="566"
-                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <filter id="filter0_d_1051_3512" x="-4" y="-4" width="793" height="566" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                     <feOffset dx="4" dy="4" />
                     <feGaussianBlur stdDeviation="4" />
                     <feComposite in2="hardAlpha" operator="out" />
@@ -81,19 +77,14 @@
             </defs>
         </svg>
 
-        <svg class="wave_2" xmlns="http://www.w3.org/2000/svg" width="670" height="500" viewBox="0 0 676 518"
-            fill="none">
+        <svg class="wave_2" xmlns="http://www.w3.org/2000/svg" width="670" height="500" viewBox="0 0 676 518" fill="none">
             <g filter="url(#filter0_d_1051_3513)">
-                <path
-                    d="M-9.61029 0H662C662 0 635.71 81.996 553.918 170.785C472.127 259.573 377.276 216.282 278.846 272.188C182.566 326.873 159.121 405.964 64.1433 462.865C-27.3773 517.696 -9.61029 501.885 -9.61029 501.885V0Z"
-                    fill="#025E5A" fill-opacity="0.89" shape-rendering="crispEdges" />
+                <path d="M-9.61029 0H662C662 0 635.71 81.996 553.918 170.785C472.127 259.573 377.276 216.282 278.846 272.188C182.566 326.873 159.121 405.964 64.1433 462.865C-27.3773 517.696 -9.61029 501.885 -9.61029 501.885V0Z" fill="#025E5A" fill-opacity="0.89" shape-rendering="crispEdges" />
             </g>
             <defs>
-                <filter id="filter0_d_1051_3513" x="-17" y="-6" width="693" height="524"
-                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <filter id="filter0_d_1051_3513" x="-17" y="-6" width="693" height="524" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
                     <feOffset dx="4" dy="4" />
                     <feGaussianBlur stdDeviation="5" />
                     <feComposite in2="hardAlpha" operator="out" />
@@ -117,63 +108,36 @@
                     <p class="text-white text-lg text-nowrap">Universitas Gadjah Mada</p>
                 </div>
             </div>
+            <div id="header_kanan" class="flex justify-end items-center me-6 lg:me-20">
+                <div class="sticky flex flex-col items-end">
+                    <button id="toggleButton" class="xl:hidden h-12 px-4">
+                        <svg class="text-teal-800 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
 
-            <div id="header_kanan" class="flex justify-end items-center me-8 ">
-
-
-                {{-- <button type="button"
-                onclick="window.location.href='{{ route('public.dashboard')}}'"
-                    class="me-10 h-12 px-12 py-4 rounded flex items-center space-x-4 font-bold bg-white hover:bg-teal-800 shadow-none hover:drop-shadow-lg text-teal-800 text-xl hover:text-white transition-all duration-200">
-                    Home
-                </button>
-
-                <button type="button"
-                    onclick="window.location.href='{{ route('public.portofolio', ['category' => 'all']) }}'"
-                    class="me-10 h-12 px-12 py-4 rounded flex items-center space-x-4 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
-                    Showcase
-                </button>
-
-                <button type="button"
-                    onclick="window.location.href='{{ route('login')}}'"
-                    class="me-16 h-12 px-12 rounded flex items-center space-x-4 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
-                    Login
-                </button>
-
-                <img class="w-20 h-auto" src="{{ asset('asset/Ellipse 66.png') }}" alt=""> --}}
-
-                
-                <div id="header_kanan" class="flex justify-end items-center me-6 lg:me-20">
-                    <div class="sticky flex flex-col items-end">
-                        <button id="toggleButton" class="xl:hidden h-12 px-4">
-                            <svg class="text-teal-800 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16m-7 6h7"></path>
-                            </svg>
+                    <div id="navbarCollapse" class="hidden xl:flex flex-col xl:flex-row xl:items-center xl:space-x-7 xl:mx-16">
+                        <button type="button" onclick="window.location.href='{{ route('public.dashboard')}}'" class="w-full border-solid border-2 border-teal-800 h-12 px-11 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 shadow-none hover:drop-shadow-lg text-teal-800 text-xl hover:text-white transition-all duration-200">
+                            Home
                         </button>
-                
-                        <div id="navbarCollapse" class="hidden xl:flex flex-col xl:flex-row xl:items-center xl:space-x-7 xl:mx-16">
-                            <button type="button" onclick="window.location.href='{{ route('public.dashboard')}}'"
-                                class="w-full border-solid border-2 border-teal-800 h-12 px-11 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 shadow-none hover:drop-shadow-lg text-teal-800 text-xl hover:text-white transition-all duration-200">
-                                Home
-                            </button>
-                
-                            <button type="button"
-                                onclick="window.location.href='{{ route('public.portofolio', ['category' => 'all']) }}'"
-                                class="w-full border-solid border-2 border-teal-800 h-12 px-6 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
-                                Showcases
-                            </button>
-                
-                            <button type="button" onclick="window.location.href='{{ route('login')}}'"
-                                class="w-full border-solid border-2 border-teal-800 h-12 px-12 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
-                                Login
-                            </button>
-                        </div>
+
+                        <button type="button" onclick="window.location.href='{{ route('public.portofolio', ['category' => 'all']) }}'" class="w-full border-solid border-2 border-teal-800 h-12 px-6 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
+                            Showcases
+                        </button>
+                        @if(session()->has('api_token'))
+                        <a href="{{route('public.user')}}">
+                            <img class="w-100 h-auto ml-4" src="{{ asset('asset/Ellipse 66.png') }}" alt="">
+                        </a>
+                        @else
+                        <button type="button" onclick="window.location.href='{{ route('login')}}'" class="w-full border-solid border-2 border-teal-800 h-12 px-12 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
+                            Login
+                        </button>
+                        @endif
                     </div>
-                    <a href="window.location.href='{{route('public.profile')}}">
-                        <img class="w-20 h-auto ml-4" src="{{ asset('asset/Ellipse 66.png') }}" alt="" > 
-                    </a>
                 </div>
             </div>
+
+
 
         </nav>
 
@@ -232,12 +196,12 @@
             Gadjah Mada </div>
     </div>
     <script>
-        document.getElementById('toggleButton').addEventListener('click', function () {
+        document.getElementById('toggleButton').addEventListener('click', function() {
             document.getElementById('navbarCollapse').classList.toggle('hidden');
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -34,7 +34,7 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/team', [publicPageController::class, 'team'])->name('public.team');
     Route::get('/TA/{id}', [publicPageController::class, 'TA'])->name('public.TA');
     Route::get('/lecturer/{id}', [publicPageController::class, 'lecturer'])->name('public.lecturer');
-    Route::get('/profile', [publicPageController::class, 'profile'])->name('public.profile');
+    Route::get('/user', [publicPageController::class, 'profile'])->name('public.user');
     Route::get('/edit_profile', [publicPageController::class, 'edit_profile'])->name('public.edit_profile');
     Route::get('/add_portfolio', [publicPageController::class, 'add_portfolio'])->name('public.add_portfolio');
 });
