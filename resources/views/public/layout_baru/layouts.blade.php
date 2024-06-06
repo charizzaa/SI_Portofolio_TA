@@ -168,9 +168,10 @@
                                 Login
                             </button>
                         </div>
-                    
                     </div>
-                    <img class="w-20 h-auto ml-4" src="{{ asset('asset/Ellipse 66.png') }}" alt=""> 
+                    <a href="window.location.href='{{route('public.profile')}}">
+                        <img class="w-20 h-auto ml-4" src="{{ asset('asset/Ellipse 66.png') }}" alt="" > 
+                    </a>
                 </div>
             </div>
 

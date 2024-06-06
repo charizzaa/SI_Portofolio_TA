@@ -170,4 +170,52 @@ class publicPageController extends Controller
         return view('public.layout_baru.lecturer', compact('contents', 'dosens', 'arrayCategories', 'arraySpecialities'));
     }
 
+    public function profile(){
+        return view('public.layout_baru.profile');
+    }
+
+    public function edit_profile(){
+        return view('public.layout_baru.edit_profile');
+    }
+
+    public function add_portfolio(){
+        return view('public.layout_baru.add_portfolio');
+        // Validate the form data
+        // $request->validate([
+        //     'nama_pembuat' => 'required|string|max:255',
+        //     'judul_portofolio' => 'required|string|max:255',
+        //     'kategori' => 'required|string|max:255',
+        //     'dosen' => 'required|string|max:255',
+        //     'deskripsi' => 'required|string',
+        //     'foto_portofolio' => 'required|array|min:3',
+        //     'foto_portofolio.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'paper_portofolio' => 'required|file|mimes:pdf,doc,docx|max:10240',
+        //     'video_demo' => 'required|file|mimes:mp4,mov,avi|max:10240',
+        // ]);
+
+        // Handle file uploads and save paths
+        // $fotoPaths = [];
+        // foreach ($request->file('foto_portofolio') as $file) {
+        //     $fotoPaths[] = $file->store('portfolio_photos', 'public');
+        // }
+
+        // $paperPath = $request->file('paper_portofolio')->store('portfolio_papers', 'public');
+        // $videoPath = $request->file('video_demo')->store('portfolio_videos', 'public');
+
+        // Create a new portfolio entry
+        // Portfolio::create([
+        //     'nama_pembuat' => $request->input('nama_pembuat'),
+        //     'judul_portofolio' => $request->input('judul_portofolio'),
+        //     'kategori' => $request->input('kategori'),
+        //     'dosen' => $request->input('dosen'),
+        //     'deskripsi' => $request->input('deskripsi'),
+        //     'foto_portofolio' => json_encode($fotoPaths),
+        //     'paper_portofolio' => $paperPath,
+        //     'video_demo' => $videoPath,
+        // ]);
+
+        // Redirect to a specific page with a success message
+        // return redirect()->route('portfolio.index')->with('success', 'Portfolio created successfully!');
+    
+    }
 }
