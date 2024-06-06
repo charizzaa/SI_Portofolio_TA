@@ -27,7 +27,7 @@ Route::get('/rss', 'RssController@index');
 Route::middleware(['guest'])->group(function (){
     Route::get('/index', [SessionController::class, 'index'])->name('login');
     Route::post('/login', [SessionController::class, 'login'])->name('authenticate');
-    Route::get('/dashboard', [publicPageController::class, 'dashboard'])->name('public.dashboard');
+    Route::get('/', [publicPageController::class, 'dashboard'])->name('public.dashboard');
     Route::get('/showcase', [publicPageController::class, 'showcase'])->name('public.showcase');
     Route::get('/portofolio', [publicPageController::class, 'portofolio'])->name('public.portofolio');
     Route::get('/team', [publicPageController::class, 'team'])->name('public.team');
@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group( function(){
 
 
     // ADMIN
-    Route::get('/', [adminAccountController::class, 'index'])->name('account.index');
+    // Route::get('/', [adminAccountController::class, 'index'])->name('account.index');
     Route::get('/kelolaakun/posts', [adminAccountController::class, 'create'])->name('account.create');
     Route::post('/kelolaakun/store', [adminAccountController::class, 'store'])->name('account.store');
     Route::get('/kelolaakun/destroy/{id}', [adminAccountController::class, 'destroy'])->name('account.destroy');

@@ -1,4 +1,5 @@
 @extends('public.layout_baru.layouts')
+@section('title', 'Team')
 @section('content')
     <div id="searc_container" class="flex flex-col items-center">
         <p class="text-4xl text-wrap text-teal-800 font-bold mb-2 mx-24 text-center">Topik Tugas Akhir</p>

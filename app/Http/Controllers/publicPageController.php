@@ -13,12 +13,15 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class publicPageController extends Controller
 {
     public function login(){
         return view('public.login');
     }
+
+
     public function dashboard(){
         return view('public.layout_baru.dashboard');
     }
@@ -117,15 +120,13 @@ class publicPageController extends Controller
 
     public function team(){
 
-        $contents =   DB::table('dosens')
-        ->select('dosens.*')
-        ->paginate(7);
+        $contents =   Http::get('http://127.0.0.1/api/team');
 
         $arraySpecialities = [];
 
         foreach($contents as $data){
             $tmp = [];
-                $specialities = specialities::where('id_dosen', $data->id)->get();
+                $specialities = $contents->specialities;
                 foreach($specialities as $speciality){
                     array_push($tmp, $speciality->speciality);
                 }
@@ -138,11 +139,7 @@ class publicPageController extends Controller
 
     public function lecturer(String $id){
 
-        $dosens = DB::table('dosens')
-        ->join('users', 'dosens.id_user', '=', 'users.id')
-        ->select('dosens.*', 'users.email')
-        ->where('dosens.id', '=', $id)
-        ->first();
+        $dosens = Http::get('http://127.0.0.1:8080/api/team');
 
         $contents =   DB::table('contents')
             ->select('contents.*')

@@ -1,5 +1,7 @@
 @extends('public.layout_baru.layouts')
 
+@section('title', 'Home')
+
 @section('content')
     <div id="konten_1" class="lg:flex flex-col lg:flex-row flex flex-row justify-center items-center px-12 py-12 my-20 mb-72">
         <div id="kiri" class="flex flex-col justify-center items-end me-40">

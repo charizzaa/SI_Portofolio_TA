@@ -1,4 +1,6 @@
 @extends('public.layouts')
+@section('title', 'Showcase')
+
 @section('content')
     <div class="card mx-auto p-2 " style="border-radius: 30px; max-width: 1225px; max-height: fit-content; margin-top: 0px;">
         <div class="mx-auto" style="margin-top: 50px;">
