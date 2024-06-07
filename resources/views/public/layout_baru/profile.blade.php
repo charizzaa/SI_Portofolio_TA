@@ -1,18 +1,18 @@
 @extends('public.layout_baru.layouts')
-@section('content')
 
+@section('content')
 <div class="container mx-auto p-4">
-    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+    <div class="text-center">
         <img src="{{ asset('asset/Ellipse 66.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
         <h2 class="text-xl font-semibold mt-4">{{$content['first_name']. ' ' . $content['last_name']}}</h2>
         <p class="text-gray-600">charizzathunjung@gmail.com</p>
-        <button class="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" onclick="window.location.href='{{route('public.edit_profile')}}'">Edit Profil</button>
+        <button class="mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-900" onclick="window.location.href='{{route('public.edit_profile')}}'">Edit Profil</button>
     </div>
 
     @if(session('user')['role'] == 'mahasiswa_ta')
-    <h3 class="text-2xl font-semibold text-center mt-8">Tugas Akhir yang Dimiliki</h3>
+    <h3 class="text-2xl font-semibold text-center m-8">Tugas Akhir yang Dimiliki</h3>
     {{-- TUGAS AKHIR YANG DIMILIKI --}}
-    <button type="button" onclick="window.location.href='{{route('public.TA', $content['id'])}}'">
+    <button class="flex mx-auto" type="button" onclick="window.location.href='{{route('public.TA', $content['id'])}}'">
         <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
             <div class="flex flex-col bg-teal-800 pb-12 rounded-xl px-6 max-w-400px h-[700px]">
@@ -75,6 +75,7 @@
         <a href="#" class="px-3 py-1 border border-gray-300 text-gray-700 rounded-r-lg hover:bg-gray-200">&raquo;</a>
     </div>
 </div>
+@endsection
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
@@ -94,19 +95,19 @@
         slide.className = 'swiper-slide p-4';
 
         slide.innerHTML = `
-                <div class="bg-teal-700 text-white p-4 rounded-lg shadow-lg w-full">
-                    <img src="${project.image}" alt="Project Image" class="w-full rounded-lg">
-                    <h4 class="mt-4 text-lg font-semibold">${project.title}</h4>
-                    <p class="mt-2">Penulis: ${project.author}</p>
-                    <div class="mt-4">
-                        ${project.keywords.map(keyword => `<span class="bg-yellow-500 text-black px-2 py-1 rounded mr-2">${keyword}</span>`).join('')}
+                    <div class="bg-teal-700 text-white p-4 rounded-lg shadow-lg w-full">
+                        <img src="${project.image}" alt="Project Image" class="w-full rounded-lg">
+                        <h4 class="mt-4 text-lg font-semibold">${project.title}</h4>
+                        <p class="mt-2">Penulis: ${project.author}</p>
+                        <div class="mt-4">
+                            ${project.keywords.map(keyword => `<span class="bg-yellow-500 text-black px-2 py-1 rounded mr-2">${keyword}</span>`).join('')}
+                        </div>
+                        <button class="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Edit Tugas Akhir</button>
+                        <div class="mt-4 text-right">
+                            <span class="text-white">${project.likes}</span>
+                        </div>
                     </div>
-                    <button class="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Edit Tugas Akhir</button>
-                    <div class="mt-4 text-right">
-                        <span class="text-white">${project.likes}</span>
-                    </div>
-                </div>
-            `;
+                `;
 
         swiperWrapper.appendChild(slide);
     });
