@@ -196,4 +196,60 @@ class publicPageController extends Controller
         }
         return view('public.layout_baru.edit_profile');
     }
+
+    public function add_portfolio(Request $request)
+    {
+        $token = session('api_token');
+        $userId = session('user')['id'];
+        $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/self/{$userId}");
+
+        if ($response->successful()) {
+            // Get the response data
+            $content = $response->json()[0];
+
+            // Check if the request is a POST (form submission)
+            if ($request->isMethod('post')) {
+                // Prepare the portfolio data
+                $portfolioData = [
+                    'owner' => $request->input('owner'),
+                    'title' => $request->input('title'),
+                    'description' => $request->input('description'),
+                    'category' => $request->input('category'),
+                    'lecturer' => $request->input('lecturer')
+                ];
+
+                // Handle file uploads
+                if ($request->hasFile('portfolio_photos')) {
+                    $photos = [];
+                    foreach ($request->file('portfolio_photos') as $photo) {
+                        $path = $photo->store('portfolio_photos');
+                        $photos[] = $path;
+                    }
+                    $portfolioData['portfolio_photos'] = json_encode($photos);
+                }
+
+                if ($request->hasFile('portfolio_paper')) {
+                    $portfolioData['portfolio_paper'] = $request->file('portfolio_paper')->store('portfolio_papers');
+                }
+
+                if ($request->hasFile('portfolio_demo')) {
+                    $portfolioData['portfolio_demo'] = $request->file('portfolio_demo')->store('portfolio_demos');
+                }
+
+                // Send the data to the API
+                $storeResponse = Http::withToken($token)->post("http://127.0.0.1:8080/api/portfolio", $portfolioData);
+
+                if ($storeResponse->successful()) {
+                    // Redirect to a success page or the profile page
+                    return redirect()->route('profile')->with('success', 'Portfolio added successfully!');
+                } else {
+                    // Handle the error
+                    return back()->withErrors('Error storing portfolio data.');
+                }
+            }
+
+        // Display the add portfolio form
+        return view('public.layout_baru.add_portfolio', compact('content'));
+        }
+    }
 }

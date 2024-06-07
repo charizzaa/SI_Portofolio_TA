@@ -6,12 +6,32 @@
         <img src="{{ asset('asset/Ellipse 66.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
         <h2 class="text-xl font-semibold mt-4">{{$content['first_name']. ' ' . $content['last_name']}}</h2>
         <p class="text-gray-600">charizzathunjung@gmail.com</p>
-        <button class="mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-900" onclick="window.location.href='{{route('public.edit_profile')}}'">Edit Profil</button>
+        <div class="flex justify-center">
+            <button class="flex flex-row mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700 " onclick="window.location.href='{{route('public.edit_profile')}}'">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                  </svg>              
+                Edit Profil
+            </button>
+        </div>
+        
     </div>
 
     @if(session('user')['role'] == 'mahasiswa_ta')
     <h3 class="text-2xl font-semibold text-center m-8">Tugas Akhir yang Dimiliki</h3>
     {{-- TUGAS AKHIR YANG DIMILIKI --}}
+    <div class="flex items-center justify-center mb-6">
+        <div class="flex flex-col w-1/3">
+            <div class="flex justify-end">
+                <button class="flex flex-row mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700" onclick="window.location.href='{{route('public.add_portfolio')}}'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                      </svg>
+                      Tambah Tugas Akhir
+                    </button>
+            </div>
+        </div>
+    </div>
     <button class="flex mx-auto" type="button" onclick="window.location.href='{{route('public.TA', $content['id'])}}'">
         <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
