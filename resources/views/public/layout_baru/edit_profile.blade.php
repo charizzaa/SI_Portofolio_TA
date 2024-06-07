@@ -15,11 +15,11 @@
         <form class="mt-6">
             <div class="mb-4">
                 <label for="first-name" class="block text-sm font-medium text-gray-700">Nama Depan</label>
-                <input type="text" id="first-name" name="first-name" value="Charizza Thunjung" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <input type="text" id="first-name" name="first_name" value="Charizza Thunjung" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
             <div class="mb-4">
                 <label for="last-name" class="block text-sm font-medium text-gray-700">Nama Belakang</label>
-                <input type="text" id="last-name" name="last-name" value="Sukmana Putra" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <input type="text" id="last-name" name="lastname" value="Sukmana Putra" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>

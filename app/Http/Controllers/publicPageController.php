@@ -40,7 +40,8 @@ class publicPageController extends Controller
         // dd($request['category']);
         $response = Http::get('http://127.0.0.1:8080/api/showcase', [
             'page' => $request->query('page', 1),
-            'category' => $request->query('category')]);
+            'category' => $request->query('category')
+        ]);
 
         if ($response->successful()) {
             // Get the response data
@@ -56,28 +57,25 @@ class publicPageController extends Controller
                 $perPage,
                 $currentPage,
                 ['path' => url('/team')]
-            ); 
+            );
             // Pass the paginated data to the view
             return view('public.layout_baru.portofolio_page', compact('contents'));
         } else {
             // Handle the error
             abort(500, 'Error fetching $content data.');
         }
-
-    
-        
     }
 
     public function profile(Request $request)
     {
         $token = session('api_token');
         $userId = session('user')['id'];
-        $response = Http::get("http://127.0.0.1:8080/api/self/{$userId}");
+        $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/self/{$userId}");
 
         if ($response->successful()) {
             // Get the response data
             $content = $response->json()[0];
-            
+
             // Pass the paginated data to the view
             return view('public.layout_baru.profile', compact('content'));
         } else {
@@ -86,35 +84,25 @@ class publicPageController extends Controller
         }
 
         return view('public.layout_baru.profile');
-    }   
+    }
 
     public function TA(String $id)
     {
 
-        $contents = DB::table('contents')
-            ->join('dosens', 'contents.id_dosen', '=', 'dosens.id')
-            ->select('contents.*', 'dosens.name')
-            ->where('contents.id', '=', $id)
-            ->first();
+        $response = Http::get("http://127.0.0.1:8080/api/showcase/{$id}");
 
-        $arrayCategories = [];
-        $arrayimages = [];
+        if ($response->successful()) {
+            // Get the response data
+            $contents = $response->json()[0];
 
-
-        $tags = tags::where('id_content', $contents->id)->get();
-        foreach ($tags as $tag) {
-            array_push($arrayCategories, $tag->tag);
+            // Pass the paginated data to the view
+            return view('public.layout_baru.TA', compact('contents'));
+        } else {
+            // Handle the error
+            abort(500, 'Error fetching $content data.');
         }
 
-
-        $images = content_images::where('id_content', $contents->id)->get();
-        foreach ($images as $image) {
-            array_push($arrayimages, $image->image_url);
-        }
-
-
-        // $dosens = dosens::all();
-        return view('public.layout_baru.TA', compact('contents', 'arrayCategories', 'arrayimages'));
+        return view('public.layout_baru.profile');
     }
 
     public function team(Request $request)
@@ -182,5 +170,30 @@ class publicPageController extends Controller
 
         // $dosens = dosens::all();
         return view('public.layout_baru.lecturer', compact('contents', 'dosens', 'arrayCategories', 'arraySpecialities'));
+    }
+
+
+    public function edit_profile()
+    {
+        $token = session('api_token');
+        $response = Http::withToken($token)->get('http://127.0.0.1:8080/api/current');
+        $content = $response->json();
+
+        return view('public.layout_baru.edit_profile', compact('content'));
+    }
+    public function store(Request $request)
+    {
+        $response = Http::post('http://127.0.0.1:8080/api/profile/update', [
+            'first_name' => request('first_name'),
+            'last_name' => request('last_name'),
+            'email' => request('email')
+        ]); 
+
+        if ($response->successful()) {
+            return redirect()->route('public.profile');
+        } else {
+            return back()->withErrors(['message' => 'Error updating profile']);
+        }
+        return view('public.layout_baru.edit_profile');
     }
 }

@@ -36,6 +36,7 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/lecturer/{id}', [publicPageController::class, 'lecturer'])->name('public.lecturer');
     Route::get('/user', [publicPageController::class, 'profile'])->name('public.user');
     Route::get('/edit_profile', [publicPageController::class, 'edit_profile'])->name('public.edit_profile');
+    Route::post('/edit_profile', [publicPageController::class, 'store'])->name('public.store');
     Route::get('/add_portfolio', [publicPageController::class, 'add_portfolio'])->name('public.add_portfolio');
 });
 

@@ -232,8 +232,8 @@
 
         <?php $counter = 0; ?>
         @foreach ($contents as $content)
-            <button type="button" onclick="window.location.href='{ {route('public.TA', $content['id']) }}'">
-                <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
+        <button type="button" onclick="window.location.href='{{route('public.TA', $content['id'])}}'">
+        <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
                     <div class="flex flex-col bg-teal-800 pb-12 rounded-xl px-6 max-w-400px h-[700px]">
                         <!-- THUMBNAIL KONTEN -->
