@@ -38,6 +38,7 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/edit_profile', [publicPageController::class, 'edit_profile'])->name('public.edit_profile');
     Route::post('/edit_profile', [publicPageController::class, 'store'])->name('public.store');
     Route::get('/add_portfolio', [publicPageController::class, 'add_portfolio'])->name('public.add_portfolio');
+    Route::post('/edit_portfolio', [publicPageController::class, 'edit_portfolio'])->name('public.edit_portfolio');
 });
 
 Route::get('/home', function(){
