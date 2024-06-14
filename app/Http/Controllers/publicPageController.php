@@ -11,6 +11,7 @@ use App\Models\specialities;
 use App\Models\tags;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -35,12 +36,15 @@ class publicPageController extends Controller
         return view('public.showcase', compact('dosens'));
     }
 
+
     public function portofolio(Request $request)
     {
         // dd($request['category']);
         $response = Http::get('http://127.0.0.1:8080/api/showcase', [
             'page' => $request->query('page', 1),
-            'category' => $request->query('category')
+            'category' => $request->query('category'),
+            'query' => $request->query('query', '')
+
         ]);
 
         if ($response->successful()) {
@@ -64,21 +68,48 @@ class publicPageController extends Controller
             // Handle the error
             abort(500, 'Error fetching $content data.');
         }
+
+        $response = Http::get('http://127.0.0.1:8080/api/team', [
+            'page' => $request->query('page', 1),
+            'query' => $request->query('query', '')
+        ]);
+    }
+
+    public function getCountLike($id)
+    {
+        try {
+            $response = Http::get("http://127.0.0.1:8080/api/content/$id/like-count");
+            $content = $response->json();
+            return compact($content);
+        } catch (Exception $e) {
+            abort(500, 'Error get like count');
+        }
     }
 
     public function profile(Request $request)
     {
-        $token = session('api_token');
-        $userId = session('user')['id'];
-        $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/self/{$userId}");
 
-        if ($response->successful()) {
-            // Get the response data
-            $content = $response->json()[0];
+        try {
+            $token = session('api_token');
+            $userId = session('user')['id'];
+            $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/self/{$userId}");
 
-            // Pass the paginated data to the view
-            return view('public.layout_baru.profile', compact('content'));
-        } else {
+            if ($response->successful() && $response->json() != null) {
+                // Get the response data
+                $content = $response->json()[0];
+
+                // Pass the paginated data to the view
+                return view('public.layout_baru.profile', compact('content'));
+            } else {
+                try {
+                    $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/current");
+                    $content = $response->json();
+                    return view('public.layout_baru.profile', compact('content'));
+                } catch (Exception $e) {
+                    abort(500, 'Error fetching $content data.');
+                }
+            }
+        } catch (Exception $e) {
             // Handle the error
             abort(500, 'Error fetching $content data.');
         }
@@ -141,35 +172,19 @@ class publicPageController extends Controller
     public function lecturer(String $id)
     {
 
-        $dosens = Http::get('http://127.0.0.1:8080/api/team');
+        try {
+            $response = Http::get('http://127.0.0.1:8080/api/team/' . $id);
+            $responses = Http::get('http://127.0.0.1:8080/api/team/content' . $id);
 
-        $contents =   DB::table('contents')
-            ->select('contents.*')
-            ->where('contents.id_dosen', '=', $dosens->id)
-            ->paginate(6);
+            // Get the response data
+            $contents = $response->json();
+            $content = $responses->json();
 
-        $arrayCategories = [];
-        $arraySpecialities = [];
-
-
-        foreach ($contents as $content) {
-            $tmp = [];
-            $tags = tags::where('id_content', $content->id)->get();
-            foreach ($tags as $tag) {
-                array_push($tmp, $tag->tag);
-            }
-            array_push($arrayCategories, $tmp);
+            // Pass the paginated data to the view
+            return view('public.layout_baru.lecturer', compact('contents', 'content'));
+        } catch (Exception $e) {
+            abort(500, 'Error fetching $content data.');
         }
-
-
-        $specialities = specialities::where('id_dosen', $dosens->id)->get();
-        foreach ($specialities as $speciality) {
-            array_push($arraySpecialities, $speciality->speciality);
-        }
-
-
-        // $dosens = dosens::all();
-        return view('public.layout_baru.lecturer', compact('contents', 'dosens', 'arrayCategories', 'arraySpecialities'));
     }
 
 
@@ -187,7 +202,7 @@ class publicPageController extends Controller
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
             'email' => request('email')
-        ]); 
+        ]);
 
         if ($response->successful()) {
             return redirect()->route('public.profile');
@@ -248,67 +263,67 @@ class publicPageController extends Controller
                 }
             }
 
-        // Display the add portfolio form
-        return view('public.layout_baru.add_portfolio', compact('content'));
+            // Display the add portfolio form
+            return view('public.layout_baru.add_portfolio', compact('content'));
         }
     }
     public function edit_portfolio(Request $request, $id)
     {
-    $token = session('api_token');
-    $userId = session('user')['id'];
-    $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/portfolio/{$id}");
+        $token = session('api_token');
+        $userId = session('user')['id'];
+        $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/portfolio/{$id}");
 
-    if ($response->successful()) {
-        // Get the portfolio data
-        $content = $response->json();
+        if ($response->successful()) {
+            // Get the portfolio data
+            $content = $response->json();
 
-        // Check if the request is a POST (form submission)
-        if ($request->isMethod('post')) {
-            // Prepare the portfolio data
-            $portfolioData = [
-                'owner' => $request('owner'),
-                'title' => $request('title'),
-                'description' => $request('description'),
-                'category' => $request('category'),
-                'lecturer' => $request('lecturer')
-            ];
+            // Check if the request is a POST (form submission)
+            if ($request->isMethod('post')) {
+                // Prepare the portfolio data
+                $portfolioData = [
+                    'owner' => $request('owner'),
+                    'title' => $request('title'),
+                    'description' => $request('description'),
+                    'category' => $request('category'),
+                    'lecturer' => $request('lecturer')
+                ];
 
-            // Handle file uploads
-            if ($request->hasFile('portfolio_photos')) {
-                $photos = [];
-                foreach ($request->file('portfolio_photos') as $photo) {
-                    $path = $photo->store('portfolio_photos');
-                    $photos[] = $path;
+                // Handle file uploads
+                if ($request->hasFile('portfolio_photos')) {
+                    $photos = [];
+                    foreach ($request->file('portfolio_photos') as $photo) {
+                        $path = $photo->store('portfolio_photos');
+                        $photos[] = $path;
+                    }
+                    $portfolioData['portfolio_photos'] = json_encode($photos);
                 }
-                $portfolioData['portfolio_photos'] = json_encode($photos);
+
+                if ($request->hasFile('portfolio_paper')) {
+                    $portfolioData['portfolio_paper'] = $request->file('portfolio_paper')->store('portfolio_papers');
+                }
+
+                if ($request->hasFile('portfolio_demo')) {
+                    $portfolioData['portfolio_demo'] = $request->file('portfolio_demo')->store('portfolio_demos');
+                }
+
+                // Send the data to the API
+                $updateResponse = Http::withToken($token)->put("http://127.0.0.1:8080/api/portfolio/{$id}", $portfolioData);
+
+                if ($updateResponse->successful()) {
+                    // Redirect to a success page or the profile page
+                    return redirect()->route('profile')->with('success', 'Portfolio updated successfully!');
+                } else {
+                    // Handle the error
+                    return back()->withErrors('Error updating portfolio data.');
+                }
             }
 
-            if ($request->hasFile('portfolio_paper')) {
-                $portfolioData['portfolio_paper'] = $request->file('portfolio_paper')->store('portfolio_papers');
-            }
-
-            if ($request->hasFile('portfolio_demo')) {
-                $portfolioData['portfolio_demo'] = $request->file('portfolio_demo')->store('portfolio_demos');
-            }
-
-            // Send the data to the API
-            $updateResponse = Http::withToken($token)->put("http://127.0.0.1:8080/api/portfolio/{$id}", $portfolioData);
-
-            if ($updateResponse->successful()) {
-                // Redirect to a success page or the profile page
-                return redirect()->route('profile')->with('success', 'Portfolio updated successfully!');
-            } else {
-                // Handle the error
-                return back()->withErrors('Error updating portfolio data.');
-            }
-        }
-
-        // Display the edit portfolio form
-        return view('public.layout_baru.edit_portfolio', compact('content'));
+            // Display the edit portfolio form
+            return view('public.layout_baru.edit_portfolio', compact('content'));
         } else {
-        // Handle the error
-        return back()->withErrors('Error fetching portfolio data.');
-         }
+            // Handle the error
+            return back()->withErrors('Error fetching portfolio data.');
+        }
     }
     public function storePortfolio(Request $request)
     {
@@ -318,7 +333,7 @@ class publicPageController extends Controller
             'description' => $request->input('description'),
             'category' => $request->input('category'),
             'lecturer' => $request->input('lecturer')
-        ]); 
+        ]);
 
         if ($response->successful()) {
             return redirect()->route('public.profile');

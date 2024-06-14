@@ -11,7 +11,7 @@
                 <img class="w-10 h-auto" src="{{asset('asset/search.png')}}" alt="">
             </button>
         </div>
-        <input id="search" type="search" name="query" placeholder="Cari Tim TA..." class="z-0 h-16 ms-[-30px] ps-10 text-lg bg-teal-800 rounded-xl text-white font-bold shadow-lg shadow-slate-700 w-[300px] lg:w-[600px]">
+        <input id="search" type="search" name="query" placeholder="Cari Portofolio TA..." class="z-0 h-16 ms-[-30px] ps-10 text-lg bg-teal-800 rounded-xl text-white font-bold shadow-lg shadow-slate-700 w-[300px] lg:w-[600px]">
     </form>
 </div>
 <div class="flex flex-col w-[100vw] mt-64">
@@ -86,7 +86,7 @@
                 <p class="text-4xl text-white font-bold text-start mb-12">{{ $content['full_name'] }}</p>
                 <p class="text-3xl text-white font-bold text-start mb-6">Bidang Keahlian</p>
                 <div class="flex justify-center space-x-6">
-                @php
+                    @php
                     $specialities = json_decode($content['specialities'], true) ?? [];
                     @endphp
                     @foreach ($specialities as $speciality)
@@ -154,7 +154,6 @@
         <script src="https://unpkg.com/@popperjs/core@2"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 <script>
-
     // $(#search).on('keyup', function()){
 
     //     $value=$(this).val();
@@ -201,5 +200,4 @@
     // currentSlide = Math.min(currentSlide + 1, totalSlides - 1);
     // showSlide(currentSlide);
     // }
-        
 </script>

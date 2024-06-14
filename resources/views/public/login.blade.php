@@ -57,7 +57,7 @@
                             </div>
                         @endif
                         <div class="flex justify-between items-center">
-                            <button type="submit"
+                            <button type="submit" id="submit"
                                 class="w-full bg-white text-black font-bold py-2 px-4 rounded">Masuk</button>
                         </div>
                         <div class="flex justify-center items-center mt-3 mb-3">

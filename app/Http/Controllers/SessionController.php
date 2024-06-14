@@ -30,13 +30,14 @@ class SessionController extends Controller
       ]);
 
       if ($response->successful()) {
+        $content = $response->json();
         $token = $response->json('token'); // Adjust the key according to the actual response structure
 
         if ($token) {
           // Save the token in the session
           session(['api_token' => $token]);
           session(['user' => $response->json('user')]);
-          return redirect()->route('public.dashboard');
+          return redirect()->route('public.dashboard', compact('content'));
         } else {
           // Handle the case where the token is not found in the response
           return back()->withErrors(['message' => 'Token not found in the response']);

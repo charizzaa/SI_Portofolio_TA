@@ -1,183 +1,168 @@
 @extends('public.layout_baru.layouts')
 
 @section('content')
-    @if (session('success'))
-        <div class="ms-12 text-gray-500 font-bold mt-8 text-lg">
-            {{ session('success') }}
+@if (session('success'))
+<div class="ms-12 text-gray-500 font-bold mt-8 text-lg">
+    {{ session('success') }}
+</div>
+@endif
+
+<div id="searc_container" class="flex flex-col items-center">
+    <p class="text-4xl text-wrap text-teal-800 font-bold mb-2 mx-24 text-center">Topik Tugas Akhir</p>
+    <p class="text-4xl text-wrap text-teal-800 font-bold mb-10 mx-24 text-center">Teknologi Rekayasa Perangkat Lunak</p>
+
+    <form action="{{ route('public.portofolio') }}" method="GET" id="search_bar" class="flex items-center">
+        <div class="bg-teal-500 rounded-full w-20 h-20 z-10 flex justify-center items-center shadow-lg shadow-slate-700">
+            <button type="submit">
+                <img class="w-10 h-auto" src="{{asset('asset/search.png')}}" alt="">
+            </button>
         </div>
-    @endif
+        <input id="category" type="text" name="category" value="all" hidden>
+        <input id="search" type="search" name="query" placeholder="Cari Portofolio TA..." class="z-0 h-16 ms-[-30px] ps-10 text-lg bg-teal-800 rounded-xl text-white font-bold shadow-lg shadow-slate-700 w-[300px] lg:w-[600px]">
+    </form>
+</div>
 
-    <div id="searc_container" class="flex flex-col items-center">
-        <p class="text-4xl text-wrap text-teal-800 font-bold mb-2 mx-24 text-center">Topik Tugas Akhir</p>
-        <p class="text-4xl text-wrap text-teal-800 font-bold mb-10 mx-24 text-center">Teknologi Rekayasa Perangkat Lunak</p>
+<p class="text-lg text-teal-800 font-bold mt-16 self-start ms-32">Cari Berdasarkan Topik</p>
 
-        <div id="search_bar" class="flex items-center">
-            <div class="bg-teal-500 rounded-full w-20 h-20 z-10 flex justify-center items-center shadow-lg shadow-slate-700">
-                <button>
-                    <img class="w-10 h-auto" src="{{asset('asset/search.png')}}" alt="">
-                </button>
-            </div>
-            <input type="text" placeholder="Cari portofolio TA..."
-                class="z-0 h-16 ms-[-30px] ps-10 text-lg bg-teal-800 rounded-xl text-white font-bold shadow-lg shadow-slate-700 w-[300px] lg:w-[600px]">
-        </div>
-    </div>
+<div class="mt-[-100px] mx-auto py-8" style="max-width: 1308px;">
+    <div class="relative">
 
-    <p class="text-lg text-teal-800 font-bold mt-16 self-start ms-32">Cari Berdasarkan Topik</p>
+        <!-- Carousel Container -->
+        <div class="overflow-hidden w-full rounded-lg">
+            <!-- Slides Container -->
+            <div id="slides" class="flex transition-transform ease-in-out duration-300 transform translate-x-0">
+                <!-- Slide 1 -->
+                <div id="container_tag" class="flex mt-48 space-x-16 w-100 h-80 me-8">
 
-    <div class="mt-[-100px] mx-auto py-8" style="max-width: 1308px;">
-        <div class="relative">
-
-            <!-- Carousel Container -->
-            <div class="overflow-hidden w-full rounded-lg">
-                <!-- Slides Container -->
-                <div id="slides" class="flex transition-transform ease-in-out duration-300 transform translate-x-0">
-                    <!-- Slide 1 -->
-                    <div id="container_tag" class="flex mt-48 space-x-16 w-100 h-80 me-8">
-
-                        <div id="item_tag" class="flex flex-col">
-                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Artificial Intelligence and Natural Language Processing'])}}'">
+                    <div id="item_tag" class="flex flex-col">
+                        <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Artificial Intelligence and Natural Language Processing'])}}'">
 
                             <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
                                 <p class="text-white text-xl pt-14 text-left ms-20 font-bold">Artificial
                                     Intelligence</p>
-                                <div
-                                    class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
+                                <div class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
                                     <div class="w-full h-full flex flex-col justify-center items-center drop-shadow-xl">
                                         <img class="w-20 h-20" src="{{ asset('asset/icon_white/aiwh.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
-                            </button>
-                        </div>
+                        </button>
+                    </div>
 
-                        <div id="item_tag" class="flex flex-col">
-                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Software Engineering'])}}'">
+                    <div id="item_tag" class="flex flex-col">
+                        <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Software Engineering'])}}'">
 
                             <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
                                 <p class="text-white text-xl pt-14 text-leftms-20 font-bold">Software Engineering</p>
-                                <div
-                                    class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
+                                <div class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
                                     <div class="w-full h-full flex flex-col justify-center items-center">
-                                        <img class="w-20 h-20" src="{{ asset('asset/icon_white/softw.png') }}"
-                                            alt="">
+                                        <img class="w-20 h-20" src="{{ asset('asset/icon_white/softw.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
+                        </button>
+                    </div>
+
+                    <div id="item_tag" class="flex flex-col">
+                        <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Intelligent Gaming'])}}'">
+
+                            <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
+                                <p class="text-white text-xl pt-14 text-left ms-20 font-bold">Intelligent Gaming</p>
+                                <div class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
+                                    <div class="w-full h-full flex flex-col justify-center items-center">
+                                        <img class="w-20 h-20" src="{{ asset('asset/icon_white/gaming.png') }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+                <!-- Slide 2 -->
+                <div id="content" class="w-full flex-shrink-0">
+                    <div id="container_tag" class="flex mt-48 space-x-16 w-auto h-80">
+
+                        <div id="item_tag" class="flex flex-col">
+                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Data Science'])}}'">
+
+                                <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
+                                    <p class="text-white text-xl pt-14 text-left ms-20 font-bold">Data Science</p>
+                                    <div class="absolute w-36 h-36 bg-teal-500  rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
+                                        <div class="w-full h-full flex flex-col justify-center items-center drop-shadow-xl">
+                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/data sc.png') }}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </button>
                         </div>
 
                         <div id="item_tag" class="flex flex-col">
-                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Intelligent Gaming'])}}'">
-
-                            <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
-                                <p class="text-white text-xl pt-14 text-left ms-20 font-bold">Intelligent Gaming</p>
-                                <div
-                                    class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
-                                    <div class="w-full h-full flex flex-col justify-center items-center">
-                                        <img class="w-20 h-20" src="{{ asset('asset/icon_white/gaming.png') }}"
-                                            alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            </button>
-                        </div>
-
-                    </div>
-                    <!-- Slide 2 -->
-                    <div id="content" class="w-full flex-shrink-0">
-                        <div id="container_tag" class="flex mt-48 space-x-16 w-auto h-80">
-
-                            <div id="item_tag" class="flex flex-col">
-                                <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Data Science'])}}'">
-
-                                <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
-                                    <p class="text-white text-xl pt-14 text-left ms-20 font-bold">Data Science</p>
-                                    <div
-                                        class="absolute w-36 h-36 bg-teal-500  rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
-                                        <div class="w-full h-full flex flex-col justify-center items-center drop-shadow-xl">
-                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/data sc.png') }}"
-                                                alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                </button>
-                            </div>
-
-                            <div id="item_tag" class="flex flex-col">
-                                <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'System Security and Cybersecurity'])}}'">
+                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'System Security and Cybersecurity'])}}'">
 
                                 <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
                                     <p class="text-white text-xl pt-14 text-left ms-12 font-bold">System Security and Cybersecurity
                                     </p>
-                                    <div
-                                        class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
+                                    <div class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
                                         <div class="w-full h-full flex flex-col justify-center items-center">
-                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/cyber.png') }}"
-                                                alt="">
+                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/cyber.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                </button>
-                            </div>
+                            </button>
+                        </div>
 
-                            <div id="item_tag" class="flex flex-col">
-                                <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Mobile and Responsive App Development'])}}'">
+                        <div id="item_tag" class="flex flex-col">
+                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Mobile and Responsive App Development'])}}'">
 
                                 <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 pe-20 hover:scale-105 transition-transform duration-300">
                                     <p class="text-white text-xl pt-14 text-left ms-12 font-bold">Mobile and Responsive App
                                         Development</p>
-                                    <div
-                                        class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
+                                    <div class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
                                         <div class="w-full h-full flex flex-col justify-center items-center">
-                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/mobile.png') }}"
-                                                alt="">
+                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/mobile.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                </button>
-                            </div>
-
+                            </button>
                         </div>
-                    </div>
-                    <!-- Slide 3 -->
-                    <div id="content" class="w-full flex-shrink-0">
-                        <div id="container_tag" class="flex mt-48 space-x-16 w-auto h-80">
 
-                            <div id="item_tag" class="flex flex-col">
-                                <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Blockchain Technology and Digital Finance'])}}'">
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div id="content" class="w-full flex-shrink-0">
+                    <div id="container_tag" class="flex mt-48 space-x-16 w-auto h-80">
+
+                        <div id="item_tag" class="flex flex-col">
+                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'Blockchain Technology and Digital Finance'])}}'">
 
                                 <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 pe-20 hover:scale-105 transition-transform duration-300">
                                     <p class="text-white text-xl pt-14 text-left ms-12 font-bold">Blockchain Technology and
                                         Digital
                                         Finance</p>
-                                    <div
-                                        class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
+                                    <div class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
                                         <div class="w-full h-full flex flex-col justify-center items-center drop-shadow-xl">
-                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/blockch.png') }}"
-                                                alt="">
+                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/blockch.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                </button>
-                            </div>
+                            </button>
+                        </div>
 
-                            <div id="item_tag" class="flex flex-col">
-                                <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'IoT'])}}'">
+                        <div id="item_tag" class="flex flex-col">
+                            <button onclick="window.location.href='{{route('public.portofolio', ['category' => 'IoT'])}}'">
 
                                 <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700 hover:scale-105 transition-transform duration-300">
                                     <p class="text-white text-xl pt-14 text-left ms-20 font-bold">IoT</p>
-                                    <div
-                                        class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
+                                    <div class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
                                         <div class="w-full h-full flex flex-col justify-center items-center">
-                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/iot.png') }}"
-                                                alt="">
+                                            <img class="w-20 h-20" src="{{ asset('asset/icon_white/iot.png') }}" alt="">
                                         </div>
                                     </div>
                                 </div>
-                                </button>
-                            </div>
+                            </button>
+                        </div>
 
-                            <!-- <div id="item_tag" class="flex">
+                        <!-- <div id="item_tag" class="flex">
                                                 <div class="relative w-96 h-36 bg-teal-800 rounded-xl shadow-lg shadow-slate-700">
                                                     <p class="text-white text-xl mt-14 ms-20 font-bold">Data Science</p>
                                                     <div class="absolute w-36 h-36 bg-teal-500 rounded-full shadow-md shadow-slate-800 end-[-20px] top-[-80px]">
@@ -188,110 +173,97 @@
                                                 </div>
                                             </div>
                                                 -->
-                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Navigation Arrows -->
-            <button
-                class="w-16 h-16 absolute top-1/2 left-0 ms-[-13px] mt-[-40px] transform -translate-y-1/2 -translate-x-4 text-teal-800 text-xl font-bold bg-white rounded-full shadow-md shadow-slate-800 border-2 border-slate-300"
-                onclick="prevSlide()">
-                &lt;
-            </button>
-            <button
-                class="w-16 h-16 absolute top-1/2 right-0 me-[-18px] mt-[-40px] transform -translate-y-1/2 translate-x-4 text-teal-800 text-xl font-bold bg-white rounded-full shadow-md shadow-slate-800 border-2 border-slate-300"
-                onclick="nextSlide()">
-                &gt;
-
-            </button>
-        </div>
-    </div>
-
-
-    <div class="flex flex-col md:flex-row w-full justify-start md:items-center ms-24 items-start mb-20 mt-[-60px] gap-4 md:gap-12">
-        <p class="text-lg text-teal-800 font-bold md:ms-24">Urutkan Berdasarkan</p>
-
-        <div>
-            <select id="role" name="role" aria-placeholder="Pilih Urutan"
-                class="w-[200px] rounded p-2 text-teal-800 font-bold bg-white border-teal-800 border-4">
-                <option class="text-teal-800 font-bold p-4 px-6" value="Admin">Pilih Urutan</option>
-                <option class="text-teal-800 font-bold p-4 px-6" value="Admin">Tanggal Upload</option>
-                <option class="text-teal-800 font-bold p-4 px-6" value="Dosen">Like</option>
-            </select>
         </div>
 
+        <!-- Navigation Arrows -->
+        <button class="w-16 h-16 absolute top-1/2 left-0 ms-[-13px] mt-[-40px] transform -translate-y-1/2 -translate-x-4 text-teal-800 text-xl font-bold bg-white rounded-full shadow-md shadow-slate-800 border-2 border-slate-300" onclick="prevSlide()">
+            &lt;
+        </button>
+        <button class="w-16 h-16 absolute top-1/2 right-0 me-[-18px] mt-[-40px] transform -translate-y-1/2 translate-x-4 text-teal-800 text-xl font-bold bg-white rounded-full shadow-md shadow-slate-800 border-2 border-slate-300" onclick="nextSlide()">
+            &gt;
+
+        </button>
+    </div>
+</div>
+
+
+<div class="flex flex-col md:flex-row w-full justify-start md:items-center ms-24 items-start mb-20 mt-[-60px] gap-4 md:gap-12">
+    <p class="text-lg text-teal-800 font-bold md:ms-24">Urutkan Berdasarkan</p>
+
+    <div>
+        <select id="role" name="role" aria-placeholder="Pilih Urutan" class="w-[200px] rounded p-2 text-teal-800 font-bold bg-white border-teal-800 border-4">
+            <option class="text-teal-800 font-bold p-4 px-6" value="Admin">Pilih Urutan</option>
+            <option class="text-teal-800 font-bold p-4 px-6" value="Admin">Tanggal Upload</option>
+            <option class="text-teal-800 font-bold p-4 px-6" value="Dosen">Like</option>
+        </select>
     </div>
 
+</div>
 
 
 
-    <!-- GRID CONTENT -->
 
-    <div id="GRID_CONTENT" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 m-12 items-start max-w-[1280px]">
+<!-- GRID CONTENT -->
 
-        <?php $counter = 0; ?>
-        @foreach ($contents as $content)
-        <button type="button" onclick="window.location.href='{{route('public.TA', $content['id'])}}'">
+<div id="GRID_CONTENT" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 m-12 items-start max-w-[1280px]">
+
+    <?php $counter = 0; ?>
+    @foreach ($contents as $content)
+    <button type="button" class="rounded-xl" onclick="window.location.href='{{route('public.TA', $content['id'])}}'">
         <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
-                    <div class="flex flex-col bg-teal-800 pb-12 rounded-xl px-6 max-w-400px h-[700px]">
-                        <!-- THUMBNAIL KONTEN -->
-                        <img class="pt-6 rounded-xl w-[400px] h-[300px]"
-                            src="{{ asset('content/content_image/thumbnail/' . $content['thumbnail_image_url']) }}"
-                            alt="">
+            <div class="flex flex-col bg-teal-800 pb-2 rounded-xl px-6 max-w-400px h-[700px]">
+                <!-- THUMBNAIL KONTEN -->
+                <img class="pt-6 rounded-xl w-[400px] h-[300px]" src="{{ asset('content/content_image/thumbnail/' . $content['thumbnail_image_url']) }}" alt="">
 
-                        <!-- DESKRIPSI KONTEN -->
+                <!-- DESKRIPSI KONTEN -->
 
-                        <p class="text-lg text-white font-bold mt-6 mb-[-15px] text-left">{{ $content['tittle'] }}</p>
-                        <div class="h-32 mt-2">
-                            <p class="text-sm text-white mt-6 text-left">{{$content['description']}}</p>
-                        </div>
-                        <p class="text-lg text-white mt-2 font-bold text-left">{{$content['first_name'] }} {{$content['last_name'] }}</p>
-                       @php $tags = json_decode($content['tags'], true) ?? []; @endphp
-                        @foreach ($tags as $data)
-                            <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
-                                <p class="text-teal-800 text-sm font-bold text-left">{{ $data }}</p>
-                            </div>
-                        @endforeach
-                        <?php $counter += 1; ?>
-                    </div>
+                <p class="text-lg text-white font-bold mt-6 mb-[-15px] text-left">{{ $content['tittle'] }}</p>
+                <div class="h-32 mt-2">
+                    <p class="text-sm text-white mt-6 text-left">{{$content['description']}}</p>
+                </div>
+                <p class="text-lg text-white mt-2 font-bold text-left">{{$content['first_name'] }} {{$content['last_name'] }}</p>
+                @php $tags = json_decode($content['tags'], true) ?? []; @endphp
+                @foreach ($tags as $data)
+                <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
+                    <p class="text-teal-800 text-sm font-bold text-left">{{ $data }}</p>
+                </div>
+                @endforeach
+                <?php $counter += 1; ?>
+            </div>
 
-                    <div class="mt-[-15px] h-20 bg-white rounded-xl border-2 border-teal-800 flex flex-row items-center px-6"
-                        style="width: 100%;">
-                        <div class="flex flex-1">
-                            <img class="w-9" src="{{asset('asset/Love.png')}}" alt="">
-                            <p id="like" class="ms-4 text-xl text-teal-800 font-bold" name="like">2.4K</p>
-                        </div>
-                        <div class="flex flex-1 flex-row justify-end">
-                            <img class="w-9 me-4" src="{{asset('asset/Bookmark.png')}}" alt="">
-                            <img class="w-8" src="{{asset('asset/share.png')}}" alt="">
-                        </div>
-
+            <div class="mt-[-15px] h-20 bg-white rounded-xl border-2 border-teal-800 flex flex-row items-center px-6" style="width: 100%;">
+                <div class="flex flex-1">
+                    <div class="content-item" data-id="{{ $content['id'] }}">
+                        <p id="like-{{ $content['id'] }}" class="ms-4 text-xl text-teal-800 font-bold" name="like"></p>
                     </div>
 
                 </div>
-            </button>
-        @endforeach
+            </div>
 
-    </div>
-
-    {{-- <div class="flex justify-center mt-4">
-        {{ $contents->links() }}
-    </div> --}}
-
-
-    <!-- PAGINATION -->
-
-    <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mb-20">
-        <div class="flex flex-1 justify-between sm:hidden">
-            <a href="#"
-                class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
-            <a href="#"
-                class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
         </div>
-        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-            <!-- <div>
+    </button>
+    @endforeach
+
+</div>
+
+{{-- <div class="flex justify-center mt-4">
+        {{ $contents->links() }}
+</div> --}}
+
+
+<!-- PAGINATION -->
+
+<div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mb-20">
+    <div class="flex flex-1 justify-between sm:hidden">
+        <a href="#" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+        <a href="#" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+    </div>
+    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <!-- <div>
                                 <p class="text-sm text-gray-700">
                                     Showing
                                     <span class="font-medium">1</span>
@@ -302,7 +274,7 @@
                                     results
                                 </p>
                                 </div> -->
-            {{-- <div>
+        {{-- <div>
                 <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                     <a href="#"
                         class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
@@ -340,12 +312,37 @@
                 </nav>
             </div> --}}
 
-        </div>
     </div>
-    @stack('script')
+</div>
+@stack('script')
 @endsection
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all content items
+        var contentItems = document.querySelectorAll('.content-item');
+
+        contentItems.forEach(function(item) {
+            // Get content ID from data attribute
+            var contentId = item.getAttribute('data-id');
+            var likeElement = document.getElementById(`like-${contentId}`);
+
+            // Make an AJAX request to fetch the like count
+            fetch(`http://127.0.0.1:8080/api/content/${contentId}/like-count`)
+                .then(response => response.json())
+                .then(data => {
+
+                    // Assuming the response is a number, e.g., 0, 1, 2
+                    likeElement.textContent = data + ' Likes';
+                })
+                .catch(error => {
+                    console.error('Error fetching like count:', error);
+                    likeElement.textContent = 'Error fetching like count';
+                });
+        });
+    });
 </script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

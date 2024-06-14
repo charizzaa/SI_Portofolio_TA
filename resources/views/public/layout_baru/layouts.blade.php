@@ -126,7 +126,7 @@
                         </button>
                         @if(session()->has('api_token'))
                         <a href="{{route('public.user')}}">
-                            <img class="w-100 h-auto ml-4" src="{{ asset('asset/Ellipse 66.png') }}" alt="">
+                            <img src="{{ asset('asset/profile.webp') }}" alt="Profile Picture" class="w-48 rounded-full">
                         </a>
                         @else
                         <button type="button" onclick="window.location.href='{{ route('login')}}'" class="w-full border-solid border-2 border-teal-800 h-12 px-12 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
@@ -136,9 +136,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </nav>
 
         <main class="w-full flex flex-col items-center mt-32">

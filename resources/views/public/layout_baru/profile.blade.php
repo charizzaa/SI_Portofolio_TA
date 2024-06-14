@@ -3,9 +3,9 @@
 @section('content')
 <div class="container mx-auto p-4">
     <div class="text-center">
-        <img src="{{ asset('asset/Ellipse 66.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
-        <h2 class="text-xl font-semibold mt-4">{{$content['first_name']. ' ' . $content['last_name']}}</h2>
-        <p class="text-gray-600">charizzathunjung@gmail.com</p>
+    <img src="{{ asset('asset/profile.webp') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
+    <h2 class="text-xl font-semibold mt-4">{{$content['first_name']. ' ' . $content['last_name']}}</h2>
+        <p class="text-gray-600">{{$content['username']}}</p>
         <div class="flex justify-center">
             <button class="flex flex-row mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700 " onclick="window.location.href='{{route('public.edit_profile')}}'">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-4">
@@ -17,7 +17,7 @@
         
     </div>
 
-    @if(session('user')['role'] == 'mahasiswa_ta')
+    @if((session('user')['role'] == 'mahasiswa_ta')&&($content['project_id']!= null))
     <h3 class="text-2xl font-semibold text-center m-8">Tugas Akhir yang Dimiliki</h3>
     {{-- TUGAS AKHIR YANG DIMILIKI --}}
     <div class="flex items-center justify-center mb-6">
@@ -80,6 +80,10 @@
     </button>
     @endif
 
+
+    
+
+
     {{-- SWIPER --}}
     <div class="swiper-container mt-4">
         <div class="swiper-wrapper">
@@ -93,7 +97,7 @@
     </div>
 
     {{-- PAGINATION --}}
-    <div class="flex justify-center mt-8">
+    <!-- <div class="flex justify-center mt-8">
         <a href="#" class="px-3 py-1 border border-gray-300 text-gray-700 rounded-l-lg hover:bg-gray-200">&laquo;</a>
         <a href="#" class="px-3 py-1 border border-gray-300 text-gray-700 hover:bg-gray-200">1</a>
         <a href="#" class="px-3 py-1 border border-gray-300 text-gray-700 hover:bg-gray-200">2</a>
@@ -101,7 +105,7 @@
         <a href="#" class="px-3 py-1 border border-gray-300 text-gray-700 hover:bg-gray-200">4</a>
         <a href="#" class="px-3 py-1 border border-gray-300 text-gray-700 hover:bg-gray-200">5</a>
         <a href="#" class="px-3 py-1 border border-gray-300 text-gray-700 rounded-r-lg hover:bg-gray-200">&raquo;</a>
-    </div>
+    </div> -->
 </div>
 @endsection
 
