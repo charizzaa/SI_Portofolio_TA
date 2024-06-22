@@ -50,6 +50,11 @@
         .custom-shape-divider-top-1701515711 .shape-fill {
             fill: #065f46;
         }
+
+        .rounded-img {
+            border-radius: 50%;
+
+        }
     </style>
 
 <body>
@@ -124,9 +129,18 @@
                         <button type="button" onclick="window.location.href='{{ route('public.portofolio', ['category' => 'all']) }}'" class="w-full border-solid border-2 border-teal-800 h-12 px-6 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
                             Showcases
                         </button>
+
                         @if(session()->has('api_token'))
-                        <a href="{{route('public.user')}}">
-                            <img src="{{ asset('asset/profile.webp') }}" alt="Profile Picture" class="w-48 rounded-full">
+                        <a href="{{ route('public.user') }}" class="flex items-center space-x-2">
+                            @php
+                            $user = session('user');
+                            $photoUrl = $user['photo_url'] ?? asset('asset/profile.webp');
+                            @endphp
+                            <div class="w-12 h-12 rounded-full overflow-hidden">
+                                <img src="{{ $photoUrl }}" alt="Profile Picture" class="w-full h-full object-cover" />
+                            </div>
+
+                            <span class="font-bold text-teal-800 text-xl">{{ $user['name'] }}</span>
                         </a>
                         @else
                         <button type="button" onclick="window.location.href='{{ route('login')}}'" class="w-full border-solid border-2 border-teal-800 h-12 px-12 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">
@@ -136,6 +150,7 @@
                     </div>
                 </div>
             </div>
+
         </nav>
 
         <main class="w-full flex flex-col items-center mt-32">

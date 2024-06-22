@@ -31,19 +31,18 @@ class SessionController extends Controller
 
       if ($response->successful()) {
         $content = $response->json();
-        $token = $response->json('token'); // Adjust the key according to the actual response structure
+        $token = $content['token']; // Adjust the key according to the actual response structure
+        $user = $content['user'];
 
         if ($token) {
-          // Save the token in the session
+          // Save the token and user data in the session
           session(['api_token' => $token]);
-          session(['user' => $response->json('user')]);
-          return redirect()->route('public.dashboard', compact('content'));
+          session(['user' => $user]);
+          return redirect()->route('public.dashboard');
         } else {
-          // Handle the case where the token is not found in the response
           return back()->withErrors(['message' => 'Token not found in the response']);
         }
       } else {
-        // Handle the error with a more descriptive message
         $errorMessage = $response->json('message') ?? 'Unknown error';
         return back()->withErrors(['message' => 'Error fetching data: ' . $errorMessage]);
       }

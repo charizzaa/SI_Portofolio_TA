@@ -188,13 +188,16 @@ class publicPageController extends Controller
     }
 
 
-    public function edit_profile()
+    public function edit_profile(Request $request)
     {
-        $token = session('api_token');
-        $response = Http::withToken($token)->get('http://127.0.0.1:8080/api/current');
-        $content = $response->json();
-
-        return view('public.layout_baru.edit_profile', compact('content'));
+        try {
+            $token = session('api_token');
+            $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/current");
+            $content = $response->json();
+            return view('public.layout_baru.edit_profile', compact('content'));
+        } catch (Exception $e) {
+            abort(500, 'Error fetching $content data.');
+        }
     }
     public function store(Request $request)
     {

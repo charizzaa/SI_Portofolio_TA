@@ -17,7 +17,7 @@
         
     </div>
 
-    @if((session('user')['role'] == 'mahasiswa_ta')&&($content['project_id']!= null))
+    @if(($content['role'] == 'mahasiswa_ta')&&($content['project_id']!= null))
     <h3 class="text-2xl font-semibold text-center m-8">Tugas Akhir yang Dimiliki</h3>
     {{-- TUGAS AKHIR YANG DIMILIKI --}}
     <div class="flex items-center justify-center mb-6">
