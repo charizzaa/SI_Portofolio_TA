@@ -3,49 +3,71 @@
 @section('content')
 <div class="container mx-auto p-4">
     <div class="text-center">
-    <img src="{{ asset('asset/profile.webp') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
-    <h2 class="text-xl font-semibold mt-4">{{$content['first_name']. ' ' . $content['last_name']}}</h2>
+        @php
+        $user = session('user');
+        $photoUrl = $user['photo_url'] ?? asset('asset/profile.webp');
+        @endphp
+        <div class="w-48 h-48 rounded-full overflow-hidden mx-auto">
+            <img src="{{ $photoUrl }}" alt="Profile Picture" class="w-full h-full object-cover" />
+        </div>
+        <h2 class="text-xl font-semibold mt-4">{{$content['first_name']. ' ' . $content['last_name']}}</h2>
         <p class="text-gray-600">{{$content['username']}}</p>
         <div class="flex justify-center">
             <button class="flex flex-row mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700 " onclick="window.location.href='{{route('public.edit_profile')}}'">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                  </svg>              
+                </svg>
                 Edit Profil
             </button>
         </div>
-        
+
     </div>
 
-    @if(($content['role'] == 'mahasiswa_ta')&&($content['project_id']!= null))
+    @if(isset($content['role']) && $content['role'] == 'mahasiswa_ta')
+
     <h3 class="text-2xl font-semibold text-center m-8">Tugas Akhir yang Dimiliki</h3>
     {{-- TUGAS AKHIR YANG DIMILIKI --}}
-    <div class="flex items-center justify-center mb-6">
-        <div class="flex flex-row justify-end w-2/5">
-            <div class="flex justify-end mx-4">
-                <button class="flex flex-row mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-400" onclick="window.location.href='{{route('public.edit_portfolio')}}'">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                      </svg>
-                      Edit Tugas Akhir
-                </button>
-            </div>
-            <div class="flex justify-end">
-                <button class="flex flex-row mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700" onclick="window.location.href='{{route('public.add_portfolio')}}'">
+    @if(!isset($content['project_id']) || $content['project_id'] == null)
+    <div class="d-flex col items-center justify-items mb-6">
+        <p class="text-center">Belum ada data</p>
+        <div class="flex flex-row justify-center">
+            <div class="flex justify-center mx-4">
+                <button class="flex flex-row mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-400" onclick="window.location.href=`{{ route('public.add_portfolio') }}`">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                      </svg>
-                      Tambah Tugas Akhir
+                    </svg>
+
+                    Tambah Tugas Akhir
                 </button>
             </div>
         </div>
     </div>
-    <button class="flex mx-auto" type="button" onclick="window.location.href='{{route('public.TA', $content['id'])}}'">
+    @else
+    <div class="flex items-center justify-center mb-6">
+        <div class="flex flex-row justify-center w-2/5">
+            <div class="flex justify-center">
+                <button class="flex flex-row mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700" onclick="window.location.href='{{ route('public.edit_portfolio') }}'">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                    </svg>
+                    Edit Tugas Akhir
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
+    @endif
+    @if(isset($content['role']) && $content['role'] == 'mahasiswa_ta' && isset($content['project_id']) && $content['project_id'] != null)
+
+    <button class="flex mx-auto" type="button" onclick="window.location.href='{{route('public.TA', $content['content_id'])}}'">
         <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
             <div class="flex flex-col bg-teal-800 pb-12 rounded-xl px-6 max-w-400px h-[700px]">
                 <!-- THUMBNAIL KONTEN -->
-                <img class="pt-6 rounded-xl w-[400px] h-[300px]" src="{{ asset('content/content_image/thumbnail/' . $content['thumbnail_image_url']) }}" alt="">
+                <div class="pt-6 rounded-xl w-[400px] h-[300px]">
+                    <img class="w-full h-full object-cover" src="{{ $content['thumbnail_image_url'] }}" alt="">
+
+                </div>
 
                 <!-- DESKRIPSI KONTEN -->
 
@@ -55,7 +77,8 @@
                 </div>
                 <p class="text-lg text-white mt-2 font-bold text-left">{{$content['first_name']. ' ' . $content['last_name']}}</p>
                 @php
-                $tags = json_decode($content['tags'], true) ?? [];
+                $tags = ($content['tags']);
+                $tags = explode(',', $tags);
                 @endphp
                 @foreach ($tags as $data)
                 <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
@@ -66,14 +89,17 @@
 
             <div class="mt-[-15px] h-20 bg-white rounded-xl border-2 border-teal-800 flex flex-row items-center px-6" style="width: 100%;">
                 <div class="flex flex-1">
-                    <img class="w-9" src="{{asset('asset/Love.png')}}" alt="">
-                    <p id="like" class="ms-4 text-xl text-teal-800 font-bold" name="like">2.4K</p>
+                    <div id="like-button" class="flex items-center" onclick="toggleLike({{ $content['content_id'] }})">
+                        <i id="like-icon" class="fa fa-heart text-teal-800 text-2xl"></i> <!-- Font Awesome heart icon -->
+                        <div class="content-item" data-id="{{ $content['id'] }}">
+                            <p id="like-{{ $content['id'] }}" class="ms-4 text-xl text-teal-800 font-bold" name="like"></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex flex-1 flex-row justify-end">
-                    <img class="w-9 me-4" src="{{asset('asset/Bookmark.png')}}" alt="">
-                    <img class="w-8" src="{{asset('asset/share.png')}}" alt="">
-                </div>
-
+                <!-- <div class="flex flex-1 flex-row justify-end">
+                <img class="w-9 me-4" src="{{asset('asset/Bookmark.png')}}" alt="">
+                <img class="w-8" src="{{asset('asset/share.png')}}" alt="">
+            </div> -->
             </div>
 
         </div>
@@ -81,7 +107,7 @@
     @endif
 
 
-    
+
 
 
     {{-- SWIPER --}}
@@ -108,7 +134,31 @@
     </div> -->
 </div>
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get all content items
+        var contentItems = document.querySelectorAll('.content-item');
 
+        contentItems.forEach(function(item) {
+            // Get content ID from data attribute
+            var contentId = item.getAttribute('data-id');
+            var likeElement = document.getElementById(`like-${contentId}`);
+
+            // Make an AJAX request to fetch the like count
+            fetch(`http://127.0.0.1:8080/api/content/${contentId}/like-count`)
+                .then(response => response.json())
+                .then(data => {
+
+                    // Assuming the response is a number, e.g., 0, 1, 2
+                    likeElement.textContent = data + ' Likes';
+                })
+                .catch(error => {
+                    console.error('Error fetching like count:', error);
+                    likeElement.textContent = 'Error fetching like count';
+                });
+        });
+    });
+</script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
     const projects = [{
@@ -171,4 +221,40 @@
             },
         }
     });
+</script>
+<script>
+    async function toggleLike(contentId) {
+        const likeIcon = document.getElementById('like-icon');
+        const likeCount = document.getElementById('like-count');
+
+        // Determine the action (like/unlike) based on the current state
+        const isLiked = likeIcon.classList.contains('text-teal-800'); // Check for class indicating liked state
+        const action = isLiked ? 'unlike' : 'like';
+
+        try {
+            const response = await fetch(`/api/${action}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    content_id: contentId
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            likeCount.textContent = data.likes;
+
+            // Toggle the like button state
+            likeIcon.classList.toggle('text-teal-800'); // Toggle the heart icon color class
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 </script>

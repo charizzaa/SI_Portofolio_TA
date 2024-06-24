@@ -7,33 +7,32 @@
         <div class="relative bg-teal-800 w-[40vw] h-[25vw] shadow-md shadow-slate-800">
             <div class="absolute right-[25vw] me-20 top-[7vw] w-[40vw] h-[25vw] border-teal-500 border-[15px] shadow-md shadow-slate-800">
             </div>
-            <img src="{{asset('content/content_image/thumbnail/' . $contents['thumbnail_image_url'])}}" class="absolute right-[15vw] top-[10vw] w-[50vw] h-[25vw] shadow-md shadow-slate-800">
+
+            <div class="absolute right-[15vw] top-[10vw] w-[50vw] h-[25vw] shadow-md shadow-slate-800">
+                <img src="{{ $contents['thumbnail_image_url'] }}" class="w-full h-full object-cover">
+            </div>
         </div>
     </div>
 
     <p class="text-teal-800 w-[70%] text-center text-5xl font-bold">{{$contents['tittle']}}</p>
 
-    <div class="mt-[-100px] mx-auto py-8 w-[80%]" style="max-width: 1308px;">
-        <div class="relative">
+    <!-- <div class="mt-[-100px] mx-auto py-8 w-[80%]" style="max-width: 1308px;">
+        <div class="relative"> -->
 
-            <!-- Carousel Container -->
-            <div class="overflow-hidden w-full rounded-lg">
-                <!-- Slides Container -->
-                <div id="slides" class="flex transition-transform ease-in-out duration-300 transform translate-x-0">
-                    <!-- Slide 1 -->
-                    @php
-                    $images = json_decode($contents['thumbnail_image_url'], true) ?? [];
-                    @endphp
-                    @foreach ($images as $data)
-                    <div id="container_tag" class="flex mt-48 space-x-16 w-500 h-80 me-8">
-                        <img src="{{asset('content/content_image/preview/' . $data)}}" alt="">
+    <!-- Carousel Container -->
+    <!-- <div class="overflow-hidden w-full rounded-lg"> -->
+    <!-- Slides Container -->
+    <!-- <div id="slides" class="flex transition-transform ease-in-out duration-300 transform translate-x-0"> -->
+    <!-- Slide 1 -->
+
+    <!-- <div id="container_tag" class="flex mt-48 space-x-16 w-500 h-80 me-8">
+                        <img src="{{ $contents['thumbnail_image_url'] }}" alt="">
                     </div>
-                    @endforeach
                 </div>
-            </div>
+            </div> -->
 
-            <!-- Navigation Arrows -->
-            <button class="w-16 h-16 absolute top-[22rem] left-0 ms-[-30px] transform -translate-y-1/2 -translate-x-4 text-teal-800 text-xl font-bold bg-white rounded-full shadow-md shadow-slate-800 border-2 border-slate-300" onclick="prevSlide()">
+    <!-- Navigation Arrows -->
+    <!-- <button class="w-16 h-16 absolute top-[22rem] left-0 ms-[-30px] transform -translate-y-1/2 -translate-x-4 text-teal-800 text-xl font-bold bg-white rounded-full shadow-md shadow-slate-800 border-2 border-slate-300" onclick="prevSlide()">
                 &lt;
             </button>
             <button class="w-16 h-16 absolute top-[22rem] right-0 transform -translate-y-1/2 translate-x-4 text-teal-800 text-xl font-bold bg-white rounded-full shadow-md shadow-slate-800 border-2 border-slate-300" onclick="nextSlide()">
@@ -41,7 +40,7 @@
 
             </button>
         </div>
-    </div>
+    </div> -->
 
     <div class="flex flex-col justify-start w-[80%] mt-12">
         <div class="relative flex w-full h-auto">
@@ -75,7 +74,8 @@
 
     <div class="flex flex-row flex-wrap mb-80 w-100 gap-20 justify-center">
         @php
-        $tags = json_decode($contents['tags'], true) ?? [];
+        $tags = ($contents['tags']);
+        $tags = explode(',', $tags);
         @endphp
         @foreach ($tags as $data)
         <?php
@@ -93,29 +93,41 @@
         } elseif ($data == 'Blockchain Technology and Digital Finance') {
             $url_image = 'asset/icon_white/blokch.png';
         } elseif ($data == 'Artificial Intelligence and Natural Language Processing') {
-            $url_image = 'asset/icon_white/ai.png';
+            $url_image = 'asset/icon_white/aiwh.png';
         } elseif ($data == 'IoT') {
             $url_image = 'asset/icon_white/iot.png';
         }
         ?>
         <div class="flex flex-col items-center justify-center bg-teal-800 h-auto w-96 px-12 pt-20 pb-12 rounded-t-full rounded-b-xl">
-            <img class="w-40 h-auto" src="{{asset($url_image)}}" alt="">
+            <img class="w-40 h-auto" src="{{ asset($url_image) }}" alt="">
             <p class="text-white text-xl text-center font-bold w-full mt-16">{{$data}}</p>
         </div>
         @endforeach
 
     </div>
+    @php
+    function convertYoutubeUrlToEmbed($url) {
+    $pattern = '/^https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)$/';
+    if (preg_match($pattern, $url, $matches)) {
+    return 'https://www.youtube.com/embed/' . $matches[1];
+    }
+    return $url;
+    }
 
+    $embedUrl = convertYoutubeUrlToEmbed($contents['video_url']);
+    @endphp
     <div class="w-full h-auto bg-teal-800 flex flex-col items-center py-4 pb-24 mb-64 justify-center">
         <p class="text-white text-5xl text-center font-bold w-full mt-16 mb-16 text-wrap px-8">Demo Tugas Akhir </p>
-        <iframe class="w-full h-[50rem] px-40 " src="{{$contents['video_url']}}" frameborder="0"></iframe>
+        <p class="text-white text-4xl text-center font-bold w-full mt-4 mb-16 text-wrap px-8">{{ $contents['video_tittle'] }} </p>
+        <iframe class="w-full h-[50rem] px-40" src="{{ $embedUrl }}" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <div class="flex mb-64">
         <div id="kontent1_kanan" class="relative bg-slate-200" style="width: 60vw; height: 1000px;">
             <div class="z-10 absolute top-0 start-0 w-full h-full bg-white rounded-2xl shadow-2xl shadow-teal-800">
-                <embed class="bg-white w-full h-full overflow-hidden" src="{{asset('content/document/'.$contents['content_url'])}}" type="">
+                <embed class="bg-white w-full h-full overflow-hidden" src="{{ $contents['content_url'] }}" type="application/pdf">
             </div>
+
 
             <div class="absolute mt-[-70px] ms-[-40px] border-[6px] border-teal-800 w-[30vw] md:w-[20vw] h-56 rounded-2xl top-0 start-0">
             </div>
@@ -134,8 +146,8 @@
 
         <div class="flex flex-col items-center lg:items-end">
             <div class="flex flex-row items-center gap-8">
-                <p class="text-[6rem] text-teal-800 font-bold">2.4 K</p>
-                <img class="w-20 h-20" src={{ asset('asset/Love.png')}} alt="">
+                <p id="like-count" class="text-[6rem] text-teal-800 font-bold">2.4 K</p>
+                <i id="like-button" class="fas fa-heart cursor-pointer text-gray-400 text-6xl"></i>
             </div>
             <p class="text-2xl text-teal-800 font-bold">Sukai Tugas Akhir Ini</p>
         </div>
@@ -267,6 +279,7 @@
         currentSlide = (currentSlide + 1) % 3;
         showSlide(currentSlide);
     }
+    
 
     // let currentSlide = 0;
 
@@ -288,5 +301,46 @@
     // showSlide(currentSlide);
     // }
 </script>
-{{-- </body>
-</html> --}}
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('like-button').addEventListener('click', async () => {
+        const likeButton = document.getElementById('like-button');
+        const likeCount = document.getElementById('like-count');
+        const contentId = {{ $contents['id'] }};
+        const csrfToken = '{{ csrf_token() }}';
+
+        // Determine the action (like/unlike) based on the current state
+        const isLiked = likeButton.classList.contains('text-teal-800');
+        const action = isLiked ? 'unlike' : 'like';
+
+        try {
+            const response = await fetch('/api/' + action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ content_id: contentId })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            likeCount.textContent = data.likes;
+
+            // Toggle the like button state
+            if (action === 'like') {
+                likeButton.classList.remove('text-gray-400');
+                likeButton.classList.add('text-teal-800');
+            } else {
+                likeButton.classList.remove('text-teal-800');
+                likeButton.classList.add('text-gray-400');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    })
+});
+</script>

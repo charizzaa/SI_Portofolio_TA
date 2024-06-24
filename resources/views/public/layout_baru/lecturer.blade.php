@@ -8,8 +8,8 @@
         <p class="text-2xl text-teal-800 font-bold">NID</p>
         <p class="text-2xl text-teal-800 font-bold">{{$contents['NID']}}</p>
         <hr class="border-1 border-teal-800 rounded-full my-6">
-        <p class="text-2xl text-teal-800 font-bold">Email</p>
-        <p class="text-2xl text-teal-800 font-bold">{{$contents['email']}}</p>
+        <p class="text-2xl text-teal-800 font-bold">Kuot Mahasiswa</p>
+        <p class="text-2xl text-teal-800 font-bold">{{$contents['max_quota']}}</p>
     </div>
 
     <div class="flex">
@@ -37,7 +37,8 @@
 
 <div class="flex flex-row flex-wrap justify-center items-center mb-64 gap-24">
     @php
-    $specialities = json_decode($contents['specialities'], true) ?? [];
+    $tags = $contents['specialities']?? [];
+    $specialities = explode(',', $tags);
     @endphp
     @foreach ($specialities as $speciality)
     <div class="flex flex-col bg-teal-800 w-80 h-[27rem] pb-16 pt-16 rounded-xl items-center shadow-lg shadow-slate-500  hover:scale-105 transition-transform duration-300">
@@ -76,7 +77,7 @@
 
 
     <?php $counter = 0; ?>
-    @foreach ($content as $content)
+    @foreach ($contents['contents'] as $content)
     <button onclick="window.location.href=`{{route('public.TA', $content['id'])}}`">
         <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
@@ -92,7 +93,9 @@
                 </div>
                 <p class="text-md text-white mt-6 font-bold text-left">Creator : {{ $content['first_name'] . ' ' . $content['first_name']  }}</p>
                 @php
-                $tags = json_decode($contents['tags'], true) ?? [];
+                $tags = ($content['tags']);
+                $tags = explode(',', $tags);
+
                 @endphp
                 @foreach ($tags as $data)
                 <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-4">

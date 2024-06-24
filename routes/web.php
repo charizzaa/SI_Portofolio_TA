@@ -39,7 +39,9 @@ Route::middleware(['guest'])->group(function (){
     Route::post('/edit_profile', [publicPageController::class, 'store'])->name('public.store');
     Route::get('/like/{id}', [publicPageController::class, 'getCountLike'])->name('likes');
     Route::get('/add_portfolio', [publicPageController::class, 'add_portfolio'])->name('public.add_portfolio');
-    Route::post('/edit_portfolio', [publicPageController::class, 'edit_portfolio'])->name('public.edit_portfolio');
+    Route::post('/add_portfolio', [publicPageController::class, 'store_portfolio'])->name('public.store_portfolio');
+    Route::get('/edit_portfolio', [publicPageController::class, 'edit_portfolio'])->name('public.edit_portfolio');
+    Route::post('/edit_portfolio', [publicPageController::class, 'update_portfolio'])->name('public.update_portfolio');
 });
 
 Route::get('/home', function(){
@@ -48,6 +50,7 @@ Route::get('/home', function(){
 
 Route::middleware(['auth'])->group( function(){
     Route::get('/logout', [SessionController::class, 'logout'])->name('session.logout');
+    ;
 
 
     // ADMIN

@@ -201,133 +201,183 @@ class publicPageController extends Controller
     }
     public function store(Request $request)
     {
-        $response = Http::post('http://127.0.0.1:8080/api/profile/update', [
-            'first_name' => request('first_name'),
-            'last_name' => request('last_name'),
-            'email' => request('email')
-        ]);
+        $token = session('api_token');
+        $data = [
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            '_method' => 'PUT'
+        ];
+
+        // Cek apakah ada file gambar yang diunggah
+        if ($request->hasFile('photo')) {
+            $response = Http::withToken($token)->attach(
+                'photo',
+                file_get_contents($request->file('photo')->getRealPath()),
+                $request->file('photo')->getClientOriginalName()
+            )->post('http://127.0.0.1:8080/api/profile/update', $data);
+        } else {
+            // Kirim permintaan ke API
+            $response = Http::withToken($token)->post('http://127.0.0.1:8080/api/profile/update', $data);
+        }
 
         if ($response->successful()) {
-            return redirect()->route('public.profile');
+            $data_user = $response->json();
+            $user = $data_user['user'];
+            session(['user' => $user]);
+            return redirect()->route('public.user');
         } else {
             return back()->withErrors(['message' => 'Error updating profile']);
         }
-        return view('public.layout_baru.edit_profile');
     }
 
-    public function add_portfolio(Request $request)
+    public function add_portfolio()
+    {
+        $token = session('api_token');
+        $userId = session('user')['id'];
+        $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/project");
+
+        if ($response->successful()) {
+            // Get the response data
+            $content = $response->json()[0];
+            // return $content;
+            // Display the add portfolio form
+            return view('public.layout_baru.add_portfolio', compact('content'));
+        } else {
+            // Handle the error
+            return back()->withErrors('Error fetching project data.');
+        }
+    }
+
+    public function edit_portfolio()
     {
         $token = session('api_token');
         $userId = session('user')['id'];
         $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/self/{$userId}");
 
-        if ($response->successful()) {
+        if ($response->successful() && $response->json() != null) {
             // Get the response data
             $content = $response->json()[0];
 
-            // Check if the request is a POST (form submission)
-            if ($request->isMethod('post')) {
-                // Prepare the portfolio data
-                $portfolioData = [
-                    'owner' => $request->input('owner'),
-                    'title' => $request->input('title'),
-                    'description' => $request->input('description'),
-                    'category' => $request->input('category'),
-                    'lecturer' => $request->input('lecturer')
-                ];
-
-                // Handle file uploads
-                if ($request->hasFile('portfolio_photos')) {
-                    $photos = [];
-                    foreach ($request->file('portfolio_photos') as $photo) {
-                        $path = $photo->store('portfolio_photos');
-                        $photos[] = $path;
-                    }
-                    $portfolioData['portfolio_photos'] = json_encode($photos);
-                }
-
-                if ($request->hasFile('portfolio_paper')) {
-                    $portfolioData['portfolio_paper'] = $request->file('portfolio_paper')->store('portfolio_papers');
-                }
-
-                if ($request->hasFile('portfolio_demo')) {
-                    $portfolioData['portfolio_demo'] = $request->file('portfolio_demo')->store('portfolio_demos');
-                }
-
-                // Send the data to the API
-                $storeResponse = Http::withToken($token)->post("http://127.0.0.1:8080/api/portfolio", $portfolioData);
-
-                if ($storeResponse->successful()) {
-                    // Redirect to a success page or the profile page
-                    return redirect()->route('profile')->with('success', 'Portfolio added successfully!');
-                } else {
-                    // Handle the error
-                    return back()->withErrors('Error storing portfolio data.');
-                }
-            }
-
-            // Display the add portfolio form
-            return view('public.layout_baru.add_portfolio', compact('content'));
-        }
-    }
-    public function edit_portfolio(Request $request, $id)
-    {
-        $token = session('api_token');
-        $userId = session('user')['id'];
-        $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/portfolio/{$id}");
-
-        if ($response->successful()) {
-            // Get the portfolio data
-            $content = $response->json();
-
-            // Check if the request is a POST (form submission)
-            if ($request->isMethod('post')) {
-                // Prepare the portfolio data
-                $portfolioData = [
-                    'owner' => $request('owner'),
-                    'title' => $request('title'),
-                    'description' => $request('description'),
-                    'category' => $request('category'),
-                    'lecturer' => $request('lecturer')
-                ];
-
-                // Handle file uploads
-                if ($request->hasFile('portfolio_photos')) {
-                    $photos = [];
-                    foreach ($request->file('portfolio_photos') as $photo) {
-                        $path = $photo->store('portfolio_photos');
-                        $photos[] = $path;
-                    }
-                    $portfolioData['portfolio_photos'] = json_encode($photos);
-                }
-
-                if ($request->hasFile('portfolio_paper')) {
-                    $portfolioData['portfolio_paper'] = $request->file('portfolio_paper')->store('portfolio_papers');
-                }
-
-                if ($request->hasFile('portfolio_demo')) {
-                    $portfolioData['portfolio_demo'] = $request->file('portfolio_demo')->store('portfolio_demos');
-                }
-
-                // Send the data to the API
-                $updateResponse = Http::withToken($token)->put("http://127.0.0.1:8080/api/portfolio/{$id}", $portfolioData);
-
-                if ($updateResponse->successful()) {
-                    // Redirect to a success page or the profile page
-                    return redirect()->route('profile')->with('success', 'Portfolio updated successfully!');
-                } else {
-                    // Handle the error
-                    return back()->withErrors('Error updating portfolio data.');
-                }
-            }
-
-            // Display the edit portfolio form
+            // Pass the paginated data to the view
             return view('public.layout_baru.edit_portfolio', compact('content'));
         } else {
             // Handle the error
-            return back()->withErrors('Error fetching portfolio data.');
+            return back()->withErrors('Error fetching project data.');
         }
     }
+
+    public function store_portfolio(Request $request)
+    {
+
+        $request->validate([
+            'thumbnail_image_url' => 'required',
+            'content_url' => 'required',
+            'video_url' => 'required',
+            'video_tittle' => 'required',
+            'tipe_konten' => 'required',
+            'tags' => 'required'
+        ]);
+
+
+        $token = session('api_token');
+        $userId = session('user')['id'];
+
+        $tagsArray = $request->input('tags');
+        $tagsString = implode(',', array_map(function ($tag) {
+            return $tag;
+        }, $tagsArray));
+
+        $data = [
+            'thumbnail_image_url' => $request->input('thumbnail_image_url'),
+            'content_url' => $request->input('content_url'),
+            'video_url' => $request->input('video_url'),
+            'video_tittle' => $request->input('video_tittle'),
+            'tipe_konten' => $request->input('tipe_konten'),
+            'tags' => $tagsString,
+        ];
+
+
+        // foreach ($request->input('tags') as $tag) {
+        //     $data['tags'][] = $tag;
+        // }
+
+        $response = Http::withToken($token)->attach(
+            'thumbnail_image_url',
+            file_get_contents($request->file('thumbnail_image_url')->getRealPath()),
+            $request->file('thumbnail_image_url')->getClientOriginalName()
+        )->attach(
+            'content_url',
+            file_get_contents($request->file('content_url')->getRealPath()),
+            $request->file('content_url')->getClientOriginalName()
+        )->post("http://127.0.0.1:8080/api/add/portofolio", $data);
+
+
+
+
+
+        if ($response->successful()) {
+            return redirect()->route('public.user');
+        } else {
+            return back()->withErrors(['message' => 'Error updating profile']);
+        }
+    }
+    public function update_portfolio(Request $request)
+    {
+        $token = session('api_token');
+        $userId = session('user')['id'];
+            
+        if ($request->has('tags')) {
+            $tagsArray = $request->input('tags');
+            $tagsString = implode(',', array_map(function ($tag) {
+                return $tag;
+            }, $tagsArray));
+            $data = [
+                'video_url' => $request->input('video_url'),
+                'video_tittle' => $request->input('video_tittle'),
+                'tipe_konten' => $request->input('tipe_konten'),
+                '_method' => 'PUT',
+                'tags' => $tagsString
+            ];
+        } else {
+            $data = [
+                'video_url' => $request->input('video_url'),
+                'video_tittle' => $request->input('video_tittle'),
+                'tipe_konten' => $request->input('tipe_konten'),
+                '_method' => 'PUT'
+            ];
+        }
+
+
+
+
+
+        if ($request->hasFile('thumbnail_image_url')) {
+            $response = Http::withToken($token)->attach(
+                'thumbnail_image_url',
+                file_get_contents($request->file('thumbnail_image_url')->getRealPath()),
+                $request->file('thumbnail_image_url')->getClientOriginalName()
+            )->post('http://127.0.0.1:8080/api/update/portofolio', $data);
+        }
+
+        if ($request->hasFile('content_url')) {
+            $response = Http::withToken($token)->attach(
+                'content_url',
+                file_get_contents($request->file('content_url')->getRealPath()),
+                $request->file('content_url')->getClientOriginalName()
+            )->post('http://127.0.0.1:8080/api/update/portofolio', $data);
+        }
+
+        $response = Http::withToken($token)->post("http://127.0.0.1:8080/api/update/portofolio/", $data);
+
+
+        if ($response->successful()) {
+            return redirect()->route('public.user');
+        } else {
+            return back()->withErrors(['message' => 'Error updating portfolio']);
+        }
+    }
+
     public function storePortfolio(Request $request)
     {
         $response = Http::post('http://127.0.0.1:8080/api/portfolio/update', [

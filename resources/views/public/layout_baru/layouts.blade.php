@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet">
@@ -13,7 +14,10 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <title>@yield('title', 'Default Title')</title>
+    <!-- select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <title>@yield('title', 'SI Porto TA')</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -140,7 +144,7 @@
                                 <img src="{{ $photoUrl }}" alt="Profile Picture" class="w-full h-full object-cover" />
                             </div>
 
-                            <span class="font-bold text-teal-800 text-xl">{{ $user['name'] }}</span>
+                            <!-- <span class="font-bold text-teal-800 text-xl">{{ $user['first_name']  }}</span> -->
                         </a>
                         @else
                         <button type="button" onclick="window.location.href='{{ route('login')}}'" class="w-full border-solid border-2 border-teal-800 h-12 px-12 rounded flex items-center space-x-2 font-bold bg-white hover:bg-teal-800 text-teal-800 text-xl hover:text-white transition-all">

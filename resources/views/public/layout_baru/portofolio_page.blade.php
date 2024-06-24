@@ -190,7 +190,7 @@
 </div>
 
 
-<div class="flex flex-col md:flex-row w-full justify-start md:items-center ms-24 items-start mb-20 mt-[-60px] gap-4 md:gap-12">
+<!-- <div class="flex flex-col md:flex-row w-full justify-start md:items-center ms-24 items-start mb-20 mt-[-60px] gap-4 md:gap-12">
     <p class="text-lg text-teal-800 font-bold md:ms-24">Urutkan Berdasarkan</p>
 
     <div>
@@ -201,7 +201,7 @@
         </select>
     </div>
 
-</div>
+</div> -->
 
 
 
