@@ -212,12 +212,12 @@
 
     <?php $counter = 0; ?>
     @foreach ($contents as $content)
-    <button type="button" class="rounded-xl" onclick="window.location.href='{{route('public.TA', $content['id'])}}'">
+    <button type="button" class="rounded-xl" onclick="window.location.href='{{ route('public.TA', $content['id']) }}'">
         <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
             <div class="flex flex-col bg-teal-800 pb-2 rounded-xl px-6 max-w-400px h-[700px]">
                 <!-- THUMBNAIL KONTEN -->
-                <img class="pt-6 rounded-xl w-[400px] h-[300px]" src="{{ asset('content/content_image/thumbnail/' . $content['thumbnail_image_url']) }}" alt="">
+                <img class="pt-6 rounded-xl w-[400px] h-[300px]" src="{{ $content['thumbnail_image_url'] }}" alt="">
 
                 <!-- DESKRIPSI KONTEN -->
 
@@ -226,11 +226,20 @@
                     <p class="text-sm text-white mt-6 text-left">{{$content['description']}}</p>
                 </div>
                 <p class="text-lg text-white mt-2 font-bold text-left">{{$content['first_name'] }} {{$content['last_name'] }}</p>
-                @php $tags = json_decode($content['tags'], true) ?? []; @endphp
+                @php
+                $tags = ($content['tags']);
+                $tags = explode(',', $tags);
+                @endphp
                 @foreach ($tags as $data)
+                @if(trim($data) !== '')
                 <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
                     <p class="text-teal-800 text-sm font-bold text-left">{{ $data }}</p>
                 </div>
+                @else
+                <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
+                    <p class="text-teal-800 text-sm font-bold text-left">Tidak ada kategori</p>
+                </div>
+                @endif
                 @endforeach
                 <?php $counter += 1; ?>
             </div>

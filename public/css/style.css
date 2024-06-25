@@ -78,4 +78,12 @@ body {
   
   .color-3 .chosen-container-multi .chosen-choices li.search-choice {
     background-color: #d3f4ff; }
+
+    .grow-button {
+      transition: transform 0.2s ease-in-out;
+  }
+
+  .grow-button:hover {
+      transform: scale(1.1);
+  }
   

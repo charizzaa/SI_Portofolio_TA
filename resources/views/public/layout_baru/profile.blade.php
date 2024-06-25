@@ -106,7 +106,12 @@
     </button>
     @endif
 
-
+    <form action="{{ route('session.logout') }}" method="POST">
+        @csrf
+        <button class="flex flex-row mt-4 mx-auto px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700 ">
+            Logout
+        </button>    
+    </form>
 
 
 

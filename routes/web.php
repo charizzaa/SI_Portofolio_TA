@@ -42,6 +42,8 @@ Route::middleware(['guest'])->group(function (){
     Route::post('/add_portfolio', [publicPageController::class, 'store_portfolio'])->name('public.store_portfolio');
     Route::get('/edit_portfolio', [publicPageController::class, 'edit_portfolio'])->name('public.edit_portfolio');
     Route::post('/edit_portfolio', [publicPageController::class, 'update_portfolio'])->name('public.update_portfolio');
+    Route::post('/comments', [publicPageController::class, 'comments'])->name('public.comments');
+    Route::post('/logout', [SessionController::class, 'logout'])->name('session.logout');
 });
 
 Route::get('/home', function(){
@@ -49,8 +51,8 @@ Route::get('/home', function(){
 });
 
 Route::middleware(['auth'])->group( function(){
-    Route::get('/logout', [SessionController::class, 'logout'])->name('session.logout');
-    ;
+    // Route::get('/logout', [SessionController::class, 'logout'])->name('session.logout');
+    // ;
 
 
     // ADMIN

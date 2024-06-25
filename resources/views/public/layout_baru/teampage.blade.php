@@ -70,7 +70,9 @@
             </div>
 
             <div class="lg:absolute flex-1 flex justify-center lg:justify-end items-center lg:items-end w-[100%] lg:w-[50%] h-auto lg:h-full bg-teal-500 rounded-tl-full">
-                <img class="lg:w-[300px] h-[400px] lg:me-24 p-4 lg:p-0" src="{{ asset('profile/thumbnail/' . $content['image_profile']) }}" alt="">
+                <div class="lg:w-[300px] h-[400px] lg:me-24 p-4 lg:p-0">
+                    <img class="w-full h-full object-cover" src="{{ $contents['image_profile']?? asset('asset/profile.webp') }}" alt="">
+                </div>
             </div>
 
         </div>
@@ -79,7 +81,9 @@
     <div class="mb-40 flex justify-center lg:justify-start">
         <div class="relative flex flex-col lg:flex-row justify-start items-end lg:items-center w-[70%] lg:min-w-[70%] bg-teal-800 shadow-xl shadow-slate-500">
             <div class="lg:absolute flex justify-center lg:justify-start items-center lg:items-end w-[100%] lg:w-[50%] h-full bg-teal-500 rounded-tr-full">
-                <img class="lg:w-[300px] h-[400px] lg:ms-24 p-4 lg:p-0" src="{{ asset('profile/thumbnail/' . $content['image_profile'] ) }}" alt="">
+                <div class="lg:w-[300px] h-[400px] lg:me-24 p-4 lg:p-0">
+                    <img class="w-full h-full object-cover" src="{{ $contents['image_profile']?? asset('asset/profile.webp') }}" alt="">
+                </div>
             </div>
 
             <div class="flex flex-col items-center lg:items-end w-[100%] h-auto lg:ps-56 lg:pe-12 py-12 ps-24 pe-24 bg-teal-800 shadow-xl shadow-slate-500">

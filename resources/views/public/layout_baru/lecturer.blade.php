@@ -4,11 +4,11 @@
 <div id="content_1" class="flex flex-col-reverse lg:flex-row items-center md:items-start gap-12 lg:gap-48">
 
     <div id="kontent1_kiri" class="flex flex-col justify-center w-auto h-auto pt-24 pb-1 mb-80">
-        <p class="text-5xl text-teal-800 font-bold mb-12">{{$contents['full_name']}}</p>
+        <p class="text-5xl text-teal-800 font-bold mb-12">{{  $contents['full_name']}}</p>
         <p class="text-2xl text-teal-800 font-bold">NID</p>
         <p class="text-2xl text-teal-800 font-bold">{{$contents['NID']}}</p>
         <hr class="border-1 border-teal-800 rounded-full my-6">
-        <p class="text-2xl text-teal-800 font-bold">Kuot Mahasiswa</p>
+        <p class="text-2xl text-teal-800 font-bold">Kuota Mahasiswa</p>
         <p class="text-2xl text-teal-800 font-bold">{{$contents['max_quota']}}</p>
     </div>
 

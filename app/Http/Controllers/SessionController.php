@@ -54,14 +54,18 @@ class SessionController extends Controller
   }
 
 
-  public function logout()
+  public function logout(Request $request)
   {
-    $users = User::find(Auth::user()->id);
-    $users->update([
-      'loginstatus' => 'off',
-    ]);
 
-    Auth::logout();
-    return redirect()->route('login')->with('succes', 'Berhasil Logout');
+    $response = Http::withToken(session('api_token'))->post('http://127.0.0.1:8080/api/logout');
+    
+
+    if ($response->successful()) {
+      session()->forget('api_token');
+      session()->forget('user');
+      return redirect()->route('login');
+    } else {
+      return back()->withErrors(['message' => 'Error logging out']);
+    }
   }
 }

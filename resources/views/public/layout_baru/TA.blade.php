@@ -8,8 +8,8 @@
             <div class="absolute right-[25vw] me-20 top-[7vw] w-[40vw] h-[25vw] border-teal-500 border-[15px] shadow-md shadow-slate-800">
             </div>
 
-            <div class="absolute right-[15vw] top-[10vw] w-[50vw] h-[25vw] shadow-md shadow-slate-800">
-                <img src="{{ $contents['thumbnail_image_url'] }}" class="w-full h-full object-cover">
+            <div class="absolute right-[15vw] top-[10vw] w-[50vw] h-[25vw] shadow-md shadow-slate-800 overflow-hidden">
+                <img src="{{ $contents['thumbnail_image_url']?? asset('asset/Rectangle 282.png') }}" class="w-full h-full object-cover">
             </div>
         </div>
     </div>
@@ -91,7 +91,7 @@
         } elseif ($data == 'Mobile and Responsive App Development') {
             $url_image = 'asset/icon_white/mobile.png';
         } elseif ($data == 'Blockchain Technology and Digital Finance') {
-            $url_image = 'asset/icon_white/blokch.png';
+            $url_image = 'asset/icon_white/blockch.png';
         } elseif ($data == 'Artificial Intelligence and Natural Language Processing') {
             $url_image = 'asset/icon_white/aiwh.png';
         } elseif ($data == 'IoT') {
@@ -106,6 +106,7 @@
 
     </div>
     @php
+    if (!function_exists('convertYoutubeUrlToEmbed')) {
     function convertYoutubeUrlToEmbed($url) {
     $pattern = '/^https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)$/';
     if (preg_match($pattern, $url, $matches)) {
@@ -115,6 +116,7 @@
     }
 
     $embedUrl = convertYoutubeUrlToEmbed($contents['video_url']);
+    }
     @endphp
     <div class="w-full h-auto bg-teal-800 flex flex-col items-center py-4 pb-24 mb-64 justify-center">
         <p class="text-white text-5xl text-center font-bold w-full mt-16 mb-16 text-wrap px-8">Demo Tugas Akhir </p>
@@ -142,57 +144,70 @@
         <p class="text-teal-800 text-5xl w-auto font-bold border-b-4 border-teal-800 mb-24 py-2">Rating dan Ulasan</p>
     </div>
 
-    <div class="flex flex-col-reverse lg:flex-row justify-center items-center w-[80vw]  mb-64 gap-20">
+    <div class="flex flex-col items-center w-[100vw] mx-64 mb-12 gap-4">
+        <p class="text-xl font-bold text-slate-500">{{ $like }} suka</p>
+        <button id="like-button" class="grow-button bg-transparent border-none" type="button" data-content-id="{{ $contents['id'] }}" data-is-liked="{{ $isLiked }}">
+            @if($isLiked)
+            <svg width="100px" height="100px" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" d="M8.85714 2C10.2878 2 11.6162 2.44463 12.7154 3.20515C13.1897 3.53331 13.6213 3.92028 14 4.35573C14.3787 3.92028 14.8103 3.53331 15.2846 3.20515C16.3838 2.44463 17.7122 2 19.1429 2C22.93 2 26 5.11539 26 8.95841C26 13.6204 23.2697 18.1581 14.6855 25.7523C14.2987 26.0945 13.7153 26.0802 13.3435 25.7212C5.57029 18.2161 2 14.4596 2 8.95841C2 5.11539 5.07005 2 8.85714 2ZM12.5005 5.69874L13.2455 6.55523C13.6441 7.01354 14.3559 7.01354 14.7545 6.55523L15.4995 5.69874C16.3924 4.67212 17.6924 4.02954 19.1429 4.02954C21.8254 4.02954 24 6.23627 24 8.95841C24 12.4335 22.1642 16.1947 14.7507 22.9817C14.3631 23.3366 13.7656 23.3258 13.389 22.9593C10.1819 19.8384 7.90173 17.4961 6.36637 15.3837C4.6874 13.0736 4 11.1716 4 8.95841C4 6.23627 6.17462 4.02954 8.85714 4.02954C10.3076 4.02954 11.6076 4.67212 12.5005 5.69874Z" fill="#000000" fill-rule="evenodd" />
+            </svg>
+            @else
+            <svg width="100px" height="100px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <style>
+                        .cls-1 {
+                            fill: #9f4c4c;
+                            fill-rule: evenodd;
+                        }
+                    </style>
+                </defs>
+                <path class="cls-1" d="M663.187,148.681a4.511,4.511,0,0,1-6.375,0S630,127.085,630,107a17,17,0,0,1,17-17c7.625,0,11.563,6.057,13,6.057S665.375,90,673,90a17,17,0,0,1,17,17C690,127.085,663.187,148.681,663.187,148.681Z" id="favorite" transform="translate(-630 -90)" />
+            </svg>
+            @endif
+        </button>
+    </div>
 
-        <div class="flex flex-col items-center lg:items-end">
-            <div class="flex flex-row items-center gap-8">
-                <p id="like-count" class="text-[6rem] text-teal-800 font-bold">2.4 K</p>
-                <i id="like-button" class="fas fa-heart cursor-pointer text-gray-400 text-6xl"></i>
-            </div>
-            <p class="text-2xl text-teal-800 font-bold">Sukai Tugas Akhir Ini</p>
-        </div>
 
-        <div class="flex flex-col shadow-md shadow-slate-800 w-[60vw]">
-
-            <div class="flex flex-col bg-white p-12">
-                <div id="commenent" class="flex flex-col">
-                    <div class="flex flex-row items-center">
-                        <div class="flex flex-row w-12 h-12 items-center justify-center bg-slate-200 rounded-full me-4">
-                            <P class="text-3xl font-bold text-black">H</P>
-                        </div>
-                        <p class="text-xl font-bold text-black">Harry Styles</p>
-                    </div>
-                    <p class="text-xl font-bold text-slate-500 mt-4">16-Agustus-2023</p>
-                    <p class="text-xl font-bold text-slate-500 mt-4 text-wrap text-justify">Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Nulla nobis soluta expedita ipsam qui minus quidem officia aut eveniet sapiente commodi
-                        quo, ipsum reiciendis ex beatae excepturi dolor praesentium quod.</p>
-                </div>
-            </div>
-
+    <div class="flex flex-col-reverse lg:flex-row justify-center items-center w-[100vw] mx-64 mb-64 gap-20">
+        <div class="flex flex-col w-[80vw] shadow-md shadow-slate-800">
+            @if($comments==null)
+            <p class="text-xl font-bold text-slate-500 mt-4 text-wrap text-justify text-center"> Belum ada komentar </p>
+            @else
+            @foreach ($comments as $comment)
             <div class="flex flex-col bg-white p-12 shadow-md shadow-slate-800">
                 <div id="commenent" class="flex flex-col">
                     <div class="flex flex-row items-center">
-                        <div class="flex flex-row w-12 h-12 items-center justify-center bg-slate-200 rounded-full me-4">
-                            <P class="text-3xl font-bold text-black">H</P>
+                        <div class="flex flex-row w-12 h-12 items-center justify-center bg-slate-200 rounded-full me-4 overflow-hidden">
+                            <img class="w-full h-full object-cover" src="{{ $comment['photo'] }}" alt="Profile photo of user">
                         </div>
-                        <p class="text-xl font-bold text-black">Harry Styles</p>
+                        <p class="text-xl font-bold text-black">{{ $comment['first_name'] . ' ' . $comment['last_name'] }}</p>
                     </div>
-                    <p class="text-xl font-bold text-slate-500 mt-4">16-Agustus-2023</p>
-                    <p class="text-xl font-bold text-slate-500 mt-4 text-wrap text-justify">Lorem ipsum dolor sit amet consectetur adipisicing
-                        elit. Nulla nobis soluta expedita ipsam qui minus quidem officia aut eveniet sapiente commodi
-                        quo, ipsum reiciendis ex beatae excepturi dolor praesentium quod.</p>
+                    <p class="text-xl font-bold text-slate-500 mt-4">{{ (new \DateTime($comment['created_at']))->format('d-m-Y')  }}</p>
+                    <p class="text-xl font-bold text-slate-500 mt-4 text-wrap text-justify">{{ $comment['content'] }}</p>
                 </div>
             </div>
+            @endforeach
+            @endif
 
             <div class="bg-teal-800 flex flex-row justify-center p-4 py-8 space-x-6">
-                <div class="flex flex-row w-12 h-12 items-center justify-center bg-slate-200 rounded-full">
-                    <P class="text-3xl font-bold text-black">H</P>
-                </div>
-                <input class="rounded-full w-[32rem] ps-6" type="text">
-                <div class="flex flex-row w-12 h-12 items-center justify-center bg-slate-200 rounded-full">
-                    <img src="upload.png" alt="">
-                </div>
+                @if(session('user'))
+                <form class="bg-teal-800 flex flex-row justify-center p-4 py-8 space-x-6" action="{{ route('public.comments') }}" method="POST">
+                    @csrf
+                    <div class="flex flex-row w-12 h-12 items-center justify-center bg-slate-200 rounded-full overflow-hidden ">
+                        <img class="w-full h-full object-cover" src="{{ $user['photo_url'] }}" alt="Profile photo of user">
+                    </div>
+                    <input name="comment" class="rounded-full w-[32rem] ps-6" type="text">
+                    <input name="content_id" class="rounded-full w-[32rem] ps-6" type="text" value="{{ $contents['id'] }}" hidden>
+                    <button type="submit" class="flex flex-row px-4 py-2 bg-teal-600 text-white text-xl rounded hover:bg-teal-700">
+                        Kirim
+                    </button>
+                </form>
+                @else
+                <p class="text-xl font-bold text-white mt-4 text-wrap text-justify text-center"> Login untuk dapat berkomentar </p>
+                @endif
             </div>
+
+
         </div>
 
     </div>
@@ -250,8 +265,55 @@
 
 
         </div> --}}
-@stack('script')
+
+
+
 @endsection
+@stack('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#like-button').click(function() {
+            var button = $(this);
+            var contentId = button.data('content-id');
+            var isLiked = button.data('is-liked');
+            var url = isLiked ? `/api/content/${contentId}/unlike` : `/api/content/${contentId}/like`;
+            
+            $.ajax({
+                url: url,
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    button.data('is-liked', !isLiked);
+                    button.empty();
+                    if (isLiked) {
+                        button.append(`
+                            <svg width="100px" height="100px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <style>
+                                        .cls-1 {
+                                            fill: #9f4c4c;
+                                            fill-rule: evenodd;
+                                        }
+                                    </style>
+                                </defs>
+                                <path class="cls-1" d="M663.187,148.681a4.511,4.511,0,0,1-6.375,0S630,127.085,630,107a17,17,0,0,1,17-17c7.625,0,11.563,6.057,13,6.057S665.375,90,673,90a17,17,0,0,1,17,17C690,127.085,663.187,148.681,663.187,148.681Z" id="favorite" transform="translate(-630 -90)" />
+                            </svg>
+                        `);
+                    } else {
+                        button.append(`
+                            <svg width="100px" height="100px" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd" d="M8.85714 2C10.2878 2 11.6162 2.44463 12.7154 3.20515C13.1897 3.53331 13.6213 3.92028 14 4.35573C14.3787 3.92028 14.8103 3.53331 15.2846 3.20515C16.3838 2.44463 17.7122 2 19.1429 2C22.93 2 26 5.11539 26 8.95841C26 13.6204 23.2697 18.1581 14.6855 25.7523C14.2987 26.0945 13.7153 26.0802 13.3435 25.7212C5.57029 18.2161 2 14.4596 2 8.95841C2 5.11539 5.07005 2 8.85714 2ZM12.5005 5.69874L13.2455 6.55523C13.6441 7.01354 14.3559 7.01354 14.7545 6.55523L15.4995 5.69874C16.3924 4.67212 17.6924 4.02954 19.1429 4.02954C21.8254 4.02954 24 6.23627 24 8.95841C24 12.4335 22.1642 16.1947 14.7507 22.9817C14.3631 23.3366 13.7656 23.3258 13.389 22.9593C10.1819 19.8384 7.90173 17.4961 6.36637 15.3837C4.6874 13.0736 4 11.1716 4 8.95841C4 6.23627 6.17462 4.02954 8.85714 4.02954C10.3076 4.02954 11.6076 4.67212 12.5005 5.69874Z" fill="#000000" fill-rule="evenodd" />
+                            </svg>
+                        `);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
@@ -279,7 +341,7 @@
         currentSlide = (currentSlide + 1) % 3;
         showSlide(currentSlide);
     }
-    
+
 
     // let currentSlide = 0;
 
@@ -300,47 +362,4 @@
     // currentSlide = Math.min(currentSlide + 1, totalSlides - 1);
     // showSlide(currentSlide);
     // }
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('like-button').addEventListener('click', async () => {
-        const likeButton = document.getElementById('like-button');
-        const likeCount = document.getElementById('like-count');
-        const contentId = {{ $contents['id'] }};
-        const csrfToken = '{{ csrf_token() }}';
-
-        // Determine the action (like/unlike) based on the current state
-        const isLiked = likeButton.classList.contains('text-teal-800');
-        const action = isLiked ? 'unlike' : 'like';
-
-        try {
-            const response = await fetch('/api/' + action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({ content_id: contentId })
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            likeCount.textContent = data.likes;
-
-            // Toggle the like button state
-            if (action === 'like') {
-                likeButton.classList.remove('text-gray-400');
-                likeButton.classList.add('text-teal-800');
-            } else {
-                likeButton.classList.remove('text-teal-800');
-                likeButton.classList.add('text-gray-400');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    })
-});
 </script>

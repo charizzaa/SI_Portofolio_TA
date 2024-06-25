@@ -121,13 +121,18 @@ class publicPageController extends Controller
     {
 
         $response = Http::get("http://127.0.0.1:8080/api/showcase/{$id}");
+        $comments = Http::get("http://127.0.0.1:8080/api/comment/{$id}");
+        $like = Http::get("http://127.0.0.1:8080/api/content/$id/like-count");
+        $isLiked = Http::get("http://127.0.0.1:8080/api/content/$id/check-like-status");
+        $user = session('user');
 
-        if ($response->successful()) {
+        if ($response->successful() && $comments->successful() && $like->successful()) {
             // Get the response data
             $contents = $response->json()[0];
+            $comments = $comments->json();
 
             // Pass the paginated data to the view
-            return view('public.layout_baru.TA', compact('contents'));
+            return view('public.layout_baru.TA', compact('contents', 'comments', 'user', 'like', 'isLiked'));
         } else {
             // Handle the error
             abort(500, 'Error fetching $content data.');
@@ -348,10 +353,6 @@ class publicPageController extends Controller
             ];
         }
 
-
-
-
-
         if ($request->hasFile('thumbnail_image_url')) {
             $response = Http::withToken($token)->attach(
                 'thumbnail_image_url',
@@ -394,5 +395,28 @@ class publicPageController extends Controller
             return back()->withErrors(['message' => 'Error updating profile']);
         }
         return view('public.layout_baru.edit_profile');
+    }
+
+    public function comments(Request $request)
+    {
+        $token = session('api_token');
+        $request->validate([
+            'content_id' => 'required',
+            'comment' => 'required'
+        ]);
+
+        $contentId = $request->input('content_id');
+
+        $response = Http::withToken($token)->post("http://127.0.0.1:8080/api/comment/{$contentId}" ,[
+            'comment' => $request->input('comment')
+        ]);
+
+
+        if ($response->successful()) {
+            return redirect()->route('public.TA', ['id' => $request->input('content_id')]);
+        } else {
+            return back()->withErrors(['message' => 'Error adding comment']);
+        }
+
     }
 }

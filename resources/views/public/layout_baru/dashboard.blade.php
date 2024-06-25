@@ -3544,12 +3544,13 @@
                 <p class="text-xl text-white text-start mb-12">Pekan Ilmiah Mahasiswa Nasional (PIMNAS) <br>
                     merupakan event resmi tahunan Pusat Prestasi <br> Nasional, Kementerian Pendidikan dan <br> Kebudayaan
                     dalam bidang penalaran untuk <br> memperlombakan karya ilmiah mahasiswa <br> tingkat nasional.</p>
-                <button type="button"
+                <a href="https://pusatprestasinasional.kemdikbud.go.id/event/riset-dan-inovasi/dikti/pekan-ilmiah-mahasiswa-nasional-2023-dikti"><button type="button"
                     class="flex w-fit h-fit px-12 items-center py-4 bg-white hover:bg-slate-300 rounded-md"
-                    onclick="window.location.href='../portofolio_page.html'">
+                    onclick=`window.location.href=https://pusatprestasinasional.kemdikbud.go.id/event/riset-dan-inovasi/dikti/pekan-ilmiah-mahasiswa-nasional-2023-dikti`>
                     <p class="text-teal-800 font-bold text-center text-xl">Read More</p>
                     <img class="" src="{{ asset('asset/dashboard/button_g.png') }}" alt="">
                 </button>
+                </a>
             </div>
 
             <div class="basis-1/2 flex flex-col w-full h-auto justify-center items-center">
@@ -3572,11 +3573,12 @@
                     meningkatkan mutu mahasiswa agar kelak dapat menjadi anggota masyarakat yang memiliki kemampuan akademis
                     dan/atau profesional yang dapat menerapkan, mengembangkan dan meyebarluaskan ilmu pengetahuan, teknologi
                     dan/atau kesenian serta memperkaya budaya nasional.</p>
-                <button onclick="window.location.href='../achievement.html'"
+                <a href="https://simbelmawa.kemdikbud.go.id/portal/index.php"><button onclick=`window.location.href="https://simbelmawa.kemdikbud.go.id/portal/index.php"`
                     class="flex w-fit h-fit px-12 items-end py-4 bg-white hover:bg-slate-300 rounded-md">
                     <p class="text-teal-800 font-bold text-center text-xl">Read More</p>
                     <img class="" src="{{ asset('asset/dashboard/button_g.png') }}" alt="">
                 </button>
+                </a>
             </div>
 
             <div class="basis-1/2 flex flex-col w-full h-auto justify-center items-center">
@@ -3598,10 +3600,11 @@
                 <p class="text-xl text-white text-start mb-12">GEMASTIK atau Pagelaran Mahasiswa Nasional Bidang
                     Teknologi Informasi dan Komunikasi, merupakan program Balai Pengembangan Talenta Indonesia, Pusat
                     Prestasi Nasional, Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. </p>
-                <button class="flex w-fit h-fit px-12 items-center py-4 bg-white hover:bg-slate-300 rounded-md">
+                <a href="https://gemastik.kemdikbud.go.id/"><button class="flex w-fit h-fit px-12 items-center py-4 bg-white hover:bg-slate-300 rounded-md">
                     <p class="text-teal-800 font-bold text-center text-xl">Read More</p>
                     <img class="" src="{{ asset('asset/dashboard/button_g.png') }}" alt="">
                 </button>
+                </a>
             </div>
 
             <div class="basis-1/2 flex flex-col w-full h-auto justify-center items-center">
