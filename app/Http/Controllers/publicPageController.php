@@ -119,18 +119,19 @@ class publicPageController extends Controller
 
     public function TA(String $id)
     {
-
+        $token = session('api_token');
         $response = Http::get("http://127.0.0.1:8080/api/showcase/{$id}");
         $comments = Http::get("http://127.0.0.1:8080/api/comment/{$id}");
         $like = Http::get("http://127.0.0.1:8080/api/content/$id/like-count");
-        $isLiked = Http::get("http://127.0.0.1:8080/api/content/$id/check-like-status");
+        $isLiked = Http::withToken($token)->get("http://127.0.0.1:8080/api/content/$id/check-like-status");
         $user = session('user');
 
         if ($response->successful() && $comments->successful() && $like->successful()) {
             // Get the response data
             $contents = $response->json()[0];
             $comments = $comments->json();
-
+            $isLiked = $isLiked->json();
+                       
             // Pass the paginated data to the view
             return view('public.layout_baru.TA', compact('contents', 'comments', 'user', 'like', 'isLiked'));
         } else {
@@ -419,4 +420,32 @@ class publicPageController extends Controller
         }
 
     }
+
+    public function like($contentId)
+    {
+        $token = session('api_token');
+        $response = Http::withToken($token)->post("http://127.0.0.1:8080/api/content/{$contentId}/like");
+
+        if ($response->successful()) {
+            return back()->with(['message' => 'Adding like']);
+
+        } else {
+            return back()->withErrors(['message' => 'Error adding like']);
+        }
+
+    }
+
+    public function unlike($contentId)
+    {
+        $token = session('api_token');
+        $response = Http::withToken($token)->delete("http://127.0.0.1:8080/api/content/{$contentId}/unlike");
+
+        if ($response->successful()) {
+            return back()->with(['message' => 'Like removed']);
+
+        } else {
+            return back()->withErrors(['message' => 'Error removing like']);
+        }
+    }
+
 }

@@ -42,6 +42,8 @@ Route::middleware(['guest'])->group(function (){
     Route::post('/add_portfolio', [publicPageController::class, 'store_portfolio'])->name('public.store_portfolio');
     Route::get('/edit_portfolio', [publicPageController::class, 'edit_portfolio'])->name('public.edit_portfolio');
     Route::post('/edit_portfolio', [publicPageController::class, 'update_portfolio'])->name('public.update_portfolio');
+    Route::post('/like/{contentId}', [publicPageController::class, 'like'])->name('like');
+    Route::delete('/unlike/{contentId}', [publicPageController::class, 'unlike'])->name('unlike');
     Route::post('/comments', [publicPageController::class, 'comments'])->name('public.comments');
     Route::post('/logout', [SessionController::class, 'logout'])->name('session.logout');
 });

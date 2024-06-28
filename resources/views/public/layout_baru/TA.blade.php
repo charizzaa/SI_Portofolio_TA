@@ -144,9 +144,11 @@
         <p class="text-teal-800 text-5xl w-auto font-bold border-b-4 border-teal-800 mb-24 py-2">Rating dan Ulasan</p>
     </div>
 
+
+
     <div class="flex flex-col items-center w-[100vw] mx-64 mb-12 gap-4">
         <p class="text-xl font-bold text-slate-500">{{ $like }} suka</p>
-        <button id="like-button" class="grow-button bg-transparent border-none" type="button" data-content-id="{{ $contents['id'] }}" data-is-liked="{{ $isLiked }}">
+        <!-- <a id="like-button" class="grow-button bg-transparent border-none" type="button" data-content-id="{{ $contents['id'] }}" data-is-liked="{{ $isLiked }}">
             @if($isLiked)
             <svg width="100px" height="100px" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path clip-rule="evenodd" d="M8.85714 2C10.2878 2 11.6162 2.44463 12.7154 3.20515C13.1897 3.53331 13.6213 3.92028 14 4.35573C14.3787 3.92028 14.8103 3.53331 15.2846 3.20515C16.3838 2.44463 17.7122 2 19.1429 2C22.93 2 26 5.11539 26 8.95841C26 13.6204 23.2697 18.1581 14.6855 25.7523C14.2987 26.0945 13.7153 26.0802 13.3435 25.7212C5.57029 18.2161 2 14.4596 2 8.95841C2 5.11539 5.07005 2 8.85714 2ZM12.5005 5.69874L13.2455 6.55523C13.6441 7.01354 14.3559 7.01354 14.7545 6.55523L15.4995 5.69874C16.3924 4.67212 17.6924 4.02954 19.1429 4.02954C21.8254 4.02954 24 6.23627 24 8.95841C24 12.4335 22.1642 16.1947 14.7507 22.9817C14.3631 23.3366 13.7656 23.3258 13.389 22.9593C10.1819 19.8384 7.90173 17.4961 6.36637 15.3837C4.6874 13.0736 4 11.1716 4 8.95841C4 6.23627 6.17462 4.02954 8.85714 4.02954C10.3076 4.02954 11.6076 4.67212 12.5005 5.69874Z" fill="#000000" fill-rule="evenodd" />
@@ -164,7 +166,44 @@
                 <path class="cls-1" d="M663.187,148.681a4.511,4.511,0,0,1-6.375,0S630,127.085,630,107a17,17,0,0,1,17-17c7.625,0,11.563,6.057,13,6.057S665.375,90,673,90a17,17,0,0,1,17,17C690,127.085,663.187,148.681,663.187,148.681Z" id="favorite" transform="translate(-630 -90)" />
             </svg>
             @endif
-        </button>
+        </a> -->
+        <div id="like-container-{{ $contents['id'] }}">
+            <!-- <p id="like-count-{{ $contents['id'] }}">Loading likes...</p> -->
+            @if(session('user'))
+            @if($isLiked)
+            <form action="{{ route('unlike', ['contentId' => $contents['id']]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit"><svg width="100px" height="100px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    fill: #9f4c4c;
+                                    fill-rule: evenodd;
+                                }
+                            </style>
+                        </defs>
+                        <path class="cls-1" d="M663.187,148.681a4.511,4.511,0,0,1-6.375,0S630,127.085,630,107a17,17,0,0,1,17-17c7.625,0,11.563,6.057,13,6.057S665.375,90,673,90a17,17,0,0,1,17,17C690,127.085,663.187,148.681,663.187,148.681Z" id="favorite" transform="translate(-630 -90)" />
+                    </svg>
+                </button>
+            </form>
+            @else
+            <form action="{{ route('like',['contentId' => $contents['id']]) }}" method="POST">
+                @csrf
+                <!-- <input type="hidden" name="id" value="{{ $contents['id'] }}" /> -->
+                <button type="submit"><svg width="100px" height="100px" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd" d="M8.85714 2C10.2878 2 11.6162 2.44463 12.7154 3.20515C13.1897 3.53331 13.6213 3.92028 14 4.35573C14.3787 3.92028 14.8103 3.53331 15.2846 3.20515C16.3838 2.44463 17.7122 2 19.1429 2C22.93 2 26 5.11539 26 8.95841C26 13.6204 23.2697 18.1581 14.6855 25.7523C14.2987 26.0945 13.7153 26.0802 13.3435 25.7212C5.57029 18.2161 2 14.4596 2 8.95841C2 5.11539 5.07005 2 8.85714 2ZM12.5005 5.69874L13.2455 6.55523C13.6441 7.01354 14.3559 7.01354 14.7545 6.55523L15.4995 5.69874C16.3924 4.67212 17.6924 4.02954 19.1429 4.02954C21.8254 4.02954 24 6.23627 24 8.95841C24 12.4335 22.1642 16.1947 14.7507 22.9817C14.3631 23.3366 13.7656 23.3258 13.389 22.9593C10.1819 19.8384 7.90173 17.4961 6.36637 15.3837C4.6874 13.0736 4 11.1716 4 8.95841C4 6.23627 6.17462 4.02954 8.85714 4.02954C10.3076 4.02954 11.6076 4.67212 12.5005 5.69874Z" fill="#000000" fill-rule="evenodd" />
+                    </svg></button>
+            </form>
+            @endif
+            @else
+
+            <!-- <input type="hidden" name="id" value="{{ $contents['id'] }}" /> -->
+            <button onclick="showAlert()"> <svg width="100px" height="100px" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path clip-rule="evenodd" d="M8.85714 2C10.2878 2 11.6162 2.44463 12.7154 3.20515C13.1897 3.53331 13.6213 3.92028 14 4.35573C14.3787 3.92028 14.8103 3.53331 15.2846 3.20515C16.3838 2.44463 17.7122 2 19.1429 2C22.93 2 26 5.11539 26 8.95841C26 13.6204 23.2697 18.1581 14.6855 25.7523C14.2987 26.0945 13.7153 26.0802 13.3435 25.7212C5.57029 18.2161 2 14.4596 2 8.95841C2 5.11539 5.07005 2 8.85714 2ZM12.5005 5.69874L13.2455 6.55523C13.6441 7.01354 14.3559 7.01354 14.7545 6.55523L15.4995 5.69874C16.3924 4.67212 17.6924 4.02954 19.1429 4.02954C21.8254 4.02954 24 6.23627 24 8.95841C24 12.4335 22.1642 16.1947 14.7507 22.9817C14.3631 23.3366 13.7656 23.3258 13.389 22.9593C10.1819 19.8384 7.90173 17.4961 6.36637 15.3837C4.6874 13.0736 4 11.1716 4 8.95841C4 6.23627 6.17462 4.02954 8.85714 4.02954C10.3076 4.02954 11.6076 4.67212 12.5005 5.69874Z" fill="#000000" fill-rule="evenodd" />
+                </svg></button>
+            @endif
+        </div>
     </div>
 
 
@@ -270,15 +309,20 @@
 
 @endsection
 @stack('script')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    function showAlert() {
+        alert("Login untuk menyukai");
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script>
     $(document).ready(function() {
         $('#like-button').click(function() {
             var button = $(this);
             var contentId = button.data('content-id');
             var isLiked = button.data('is-liked');
             var url = isLiked ? `/api/content/${contentId}/unlike` : `/api/content/${contentId}/like`;
-            
+
             $.ajax({
                 url: url,
                 type: 'POST',
@@ -314,7 +358,70 @@
         });
     });
 </script>
+<script>
+    async function toggleLike(contentId) {
+        const likeIcon = document.getElementById('like-icon');
+        const likeCount = document.getElementById('like-count');
 
+        // Determine the action (like/unlike) based on the current state
+        const isLiked = likeIcon.classList.contains('text-teal-800'); // Check for class indicating liked state
+        const action = isLiked ? 'unlike' : 'like';
+        const method = isLiked ? 'DELETE' : 'POST';
+
+        try {
+            const response = await fetch(`/api/content/${$contentId}/${action}`, {
+                method: $ {
+                    method
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    content_id: contentId
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            likeCount.textContent = data.likes;
+
+            // Toggle the like button state
+            likeIcon.classList.toggle('text-teal-800'); // Toggle the heart icon color class
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script> -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetchLikeCount({
+            {
+                $contents['id']
+            }
+        });
+    });
+
+    async function fetchLikeCount(contentId) {
+        
+        try {
+            const response = await fetch(`/api/contents/${contentId}/likes-count`);
+            const data = await response.json();
+            const likeCountText = transChoice('{0} no likes|{1} :count like|[2,*] :count likes', data.count, {
+                count: data.count
+            });
+            document.getElementById(`like-count-${contentId}`).innerText = likeCountText;
+        } catch (error) {
+            console.error('Error fetching like count:', error);
+        }
+    }
+
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
 </script>
