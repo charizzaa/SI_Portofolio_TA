@@ -86,4 +86,8 @@ body {
   .grow-button:hover {
       transform: scale(1.1);
   }
+  .active {
+    border-color: blue;
+    color: blue;
+}
   

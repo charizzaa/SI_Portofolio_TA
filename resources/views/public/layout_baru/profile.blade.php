@@ -43,7 +43,7 @@
         </div>
     </div>
     @else
-    <div class="flex items-center justify-center mb-6">
+    <div class="flex items-center justify-center mb-2">
         <div class="flex flex-row justify-center w-2/5">
             <div class="flex justify-center">
                 <button class="flex flex-row mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700" onclick="window.location.href='{{ route('public.edit_portfolio') }}'">
@@ -58,54 +58,139 @@
     @endif
     @endif
     @if(isset($content['role']) && $content['role'] == 'mahasiswa_ta' && isset($content['project_id']) && $content['project_id'] != null)
-    <div class="content">
-        <button class="flex mx-auto" type="button" onclick="window.location.href='{{route('public.TA', $content['content_id'])}}'">
-            <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
+    <div class="content flex items-center justify-center mb-6">
+        <div class="flex flex-row justify-center w-2/5">
+            <div class="flex justify-center">
+                <button class="flex flex-row mt-4 px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700" onclick="window.location.href='{{route('public.TA', $content['content_id'])}}'">
+                    Detail Tugas Akhir
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
 
-                <div class="flex flex-col bg-teal-800 pb-12 rounded-xl px-6 max-w-400px h-[700px]">
-                    <!-- THUMBNAIL KONTEN -->
-                    <div class="pt-6 rounded-xl w-[400px] h-[300px]">
-                        <img class="w-full h-full object-cover" src="{{ $content['thumbnail_image_url'] }}" alt="">
+    <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" role="tablist">
+            <li class="me-2" role="presentation">
+                <button class="inline-block p-4 border-b-2 rounded-t-lg active text-2xl" id="suka-tab" data-tabs-target="#suka" type="button" role="tab" aria-controls="suka" aria-selected="true">Disukai</button>
+            </li>
+            <li class="me-2" role="presentation">
+                <button class="inline-block p-4 border-b-2 rounded-t-lg text-2xl" id="komentar-tab" data-tabs-target="#komentar" type="button" role="tab" aria-controls="komentar" aria-selected="false">Dikomentari</button>
+            </li>
+        </ul>
+    </div>
+    <div id="default-tab-content">
+        <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="suka" role="tabpanel" aria-labelledby="suka-tab">
+            <div id="GRID_CONTENT" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 m-12 items-start max-w-[1280px]">
 
-                    </div>
+                <?php $counter = 0; ?>
+                @foreach ($contentslike as $contentl)
+                <button type="button" class="rounded-xl" onclick="window.location.href='{{ route('public.TA', $contentl['id']) }}'">
+                    <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
 
-                    <!-- DESKRIPSI KONTEN -->
+                        <div class="flex flex-col bg-teal-800 pb-2 rounded-xl px-6 max-w-400px h-[700px]">
+                            <!-- THUMBNAIL KONTEN -->
+                            <img class="pt-6 rounded-xl w-[400px] h-[300px]" src="{{ $contentl['thumbnail_image_url'] }}" alt="">
 
-                    <p class="text-lg text-white font-bold mt-6 mb-[-15px] text-left">{{ $content['tittle'] }}</p>
-                    <div class="h-32 mt-2">
-                        <p class="text-sm text-white mt-6 text-left">{{$content['description']}}</p>
-                    </div>
-                    <p class="text-lg text-white mt-2 font-bold text-left">{{$content['first_name']. ' ' . $content['last_name']}}</p>
-                    @php
-                    $tags = ($content['tags']);
-                    $tags = explode(',', $tags);
-                    @endphp
-                    @foreach ($tags as $data)
-                    <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
-                        <p class="text-teal-800 text-sm font-bold text-left">{{ $data }}</p>
-                    </div>
-                    @endforeach
-                </div>
+                            <!-- DESKRIPSI KONTEN -->
 
-                <div class="mt-[-15px] h-20 bg-white rounded-xl border-2 border-teal-800 flex flex-row items-center px-6" style="width: 100%;">
-                    <div class="flex flex-1">
-                        <div id="like-button" class="flex items-center" onclick="toggleLike({{ $content['content_id'] }})">
-                            <i id="like-icon" class="fa fa-heart text-teal-800 text-2xl"></i> <!-- Font Awesome heart icon -->
-                            <div class="content-item" data-id="{{ $content['id'] }}">
-                                <p id="like-{{ $content['id'] }}" class="ms-4 text-xl text-teal-800 font-bold" name="like"></p>
+                            <p class="text-lg text-white font-bold mt-6 mb-[-15px] text-left">{{ $contentl['tittle'] }}</p>
+                            <div class="h-32 mt-2">
+                                <p class="text-sm text-white mt-6 text-left">{{$contentl['description']}}</p>
+                            </div>
+                            <p class="text-lg text-white mt-2 font-bold text-left">{{$contentl['first_name'] }} {{$contentl['last_name'] }}</p>
+                            @php
+                            $tags = ($contentl['tags']);
+                            $tags = explode(',', $tags);
+                            @endphp
+                            @foreach ($tags as $data)
+                            @if(trim($data) !== '')
+                            <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
+                                <p class="text-teal-800 text-sm font-bold text-left">{{ $data }}</p>
+                            </div>
+                            @else
+                            <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
+                                <p class="text-teal-800 text-sm font-bold text-left">Tidak ada kategori</p>
+                            </div>
+                            @endif
+                            @endforeach
+                            <?php $counter += 1; ?>
+                        </div>
+
+                        <div class="mt-[-15px] h-20 bg-white rounded-xl border-2 border-teal-800 flex flex-row items-center px-6" style="width: 100%;">
+                            <div class="flex flex-1">
+                                <div class="content-item" data-id="{{ $contentl['id'] }}">
+                                    <p id="like-{{ $contentl['id'] }}" class="ms-4 text-xl text-teal-800 font-bold" name="like"></p>
+                                </div>
+
                             </div>
                         </div>
+
                     </div>
-                    <!-- <div class="flex flex-1 flex-row justify-end">
-                <img class="w-9 me-4" src="{{asset('asset/Bookmark.png')}}" alt="">
-                <img class="w-8" src="{{asset('asset/share.png')}}" alt="">
-            </div> -->
+                </button>
+                @endforeach
+
+            </div>
+        </div>
+        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="komentar" role="tabpanel" aria-labelledby="komentar-tab">
+        <div id="GRID_CONTENT" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-12 m-12 items-start max-w-[1280px]">
+
+<?php $counter = 0; ?>
+@foreach ($contentscomment as $contentl)
+<button type="button" class="rounded-xl" onclick="window.location.href='{{ route('public.TA', $contentl['id']) }}'">
+    <div id="item_content" class="flex flex-col w-auto h-auto shadow-lg shadow-slate-500 hover:scale-105 transition-transform duration-300">
+
+        <div class="flex flex-col bg-teal-800 pb-2 rounded-xl px-6 max-w-400px h-[700px]">
+            <!-- THUMBNAIL KONTEN -->
+            <img class="pt-6 rounded-xl w-[400px] h-[300px]" src="{{ $contentl['thumbnail_image_url'] }}" alt="">
+
+            <!-- DESKRIPSI KONTEN -->
+
+            <p class="text-lg text-white font-bold mt-6 mb-[-15px] text-left">{{ $contentl['tittle'] }}</p>
+            <div class="h-32 mt-2">
+                <p class="text-sm text-white mt-6 text-left">{{$contentl['description']}}</p>
+            </div>
+            <p class="text-lg text-white mt-2 font-bold text-left">{{$contentl['first_name'] }} {{$contentl['last_name'] }}</p>
+            @php
+            $tags = ($contentl['tags']);
+            $tags = explode(',', $tags);
+            @endphp
+            @foreach ($tags as $data)
+            @if(trim($data) !== '')
+            <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
+                <p class="text-teal-800 text-sm font-bold text-left">{{ $data }}</p>
+            </div>
+            @else
+            <div class="bg-white w-fit h-auto p-3 rounded-t-xl mt-6">
+                <p class="text-teal-800 text-sm font-bold text-left">Tidak ada kategori</p>
+            </div>
+            @endif
+            @endforeach
+            <?php $counter += 1; ?>
+        </div>
+
+        <div class="mt-[-15px] h-20 bg-white rounded-xl border-2 border-teal-800 flex flex-row items-center px-6" style="width: 100%;">
+            <div class="flex flex-1">
+                <div class="content-item" data-id="{{ $contentl['id'] }}">
+                    <p id="like-{{ $contentl['id'] }}" class="ms-4 text-xl text-teal-800 font-bold" name="like"></p>
                 </div>
 
             </div>
-        </button>
+        </div>
+
     </div>
-    @endif
+</button>
+@endforeach
+
+</div>
+        </div>
+    </div>
+
+
+
+
+
+
 
     <form action="{{ route('session.logout') }}" method="POST">
         @csrf
@@ -224,5 +309,26 @@
                 spaceBetween: 40,
             },
         }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('[role="tab"]');
+        const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active classes from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to the clicked button
+                button.classList.add('active');
+
+                // Hide all tab panels
+                tabPanels.forEach(panel => panel.classList.add('hidden'));
+                // Show the tab panel corresponding to the clicked button
+                const target = document.querySelector(button.getAttribute('data-tabs-target'));
+                target.classList.remove('hidden');
+            });
+        });
     });
 </script>

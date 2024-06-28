@@ -60,8 +60,9 @@ class publicPageController extends Controller
                 $contents['total'],
                 $perPage,
                 $currentPage,
-                ['path' => url('/team')]
+                ['path' => url('/showcase')]
             );
+
             // Pass the paginated data to the view
             return view('public.layout_baru.portofolio_page', compact('contents'));
         } else {
@@ -93,18 +94,59 @@ class publicPageController extends Controller
             $token = session('api_token');
             $userId = session('user')['id'];
             $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/self/{$userId}");
+            $contentslike = Http::withToken($token)->get("http://127.0.0.1:8080/api/showLiked", ['page' => $request->query('page', 1)]);
+            $contentscomment = Http::withToken($token)->get("http://127.0.0.1:8080/api/showComments", ['page' => $request->query('page', 1)]);
 
             if ($response->successful() && $response->json() != null) {
                 // Get the response data
+
                 $content = $response->json()[0];
+                $contentslike = $contentslike->json();
+                $contentscomment = $contentscomment->json();
+
+                // Paginate the data manually
+                $currentPage = $contentslike['current_page'];
+                $data = collect($contentslike['data']);
+                $perPage = 5;
+                $contentslike = new \Illuminate\Pagination\LengthAwarePaginator(
+                    $data,
+                    $contentslike['total'],
+                    $perPage,
+                    $currentPage,
+                    ['path' => url('/profile')]
+                );
+
+                
+
+                
+
+                 // Paginate the data manually
+                 $currentPagec = $contentscomment['current_page'];
+                 $datac = collect($contentscomment['data']);
+                 $perPagec = 5;
+                 $contentscomment = new \Illuminate\Pagination\LengthAwarePaginator(
+                     $datac,
+                     $contentscomment['total'],
+                     $perPagec,
+                     $currentPagec,
+                     ['path' => url('/profile')]
+                 );
+
+                 
+                 
+
+                 
 
                 // Pass the paginated data to the view
-                return view('public.layout_baru.profile', compact('content'));
+                return view('public.layout_baru.profile', compact('content', 'contentslike', 'contentscomment'));
             } else {
                 try {
                     $response = Http::withToken($token)->get("http://127.0.0.1:8080/api/current");
                     $content = $response->json();
-                    return view('public.layout_baru.profile', compact('content'));
+                    $contentslike = $contentslike->json();
+                    $contentscomment = $contentscomment->json();
+
+                    return view('public.layout_baru.profile', compact('content', 'contentslike', 'contentscomment'));
                 } catch (Exception $e) {
                     abort(500, 'Error fetching $content data.');
                 }
@@ -131,7 +173,7 @@ class publicPageController extends Controller
             $contents = $response->json()[0];
             $comments = $comments->json();
             $isLiked = $isLiked->json();
-                       
+
             // Pass the paginated data to the view
             return view('public.layout_baru.TA', compact('contents', 'comments', 'user', 'like', 'isLiked'));
         } else {
@@ -332,7 +374,7 @@ class publicPageController extends Controller
     {
         $token = session('api_token');
         $userId = session('user')['id'];
-            
+
         if ($request->has('tags')) {
             $tagsArray = $request->input('tags');
             $tagsString = implode(',', array_map(function ($tag) {
@@ -408,7 +450,7 @@ class publicPageController extends Controller
 
         $contentId = $request->input('content_id');
 
-        $response = Http::withToken($token)->post("http://127.0.0.1:8080/api/comment/{$contentId}" ,[
+        $response = Http::withToken($token)->post("http://127.0.0.1:8080/api/comment/{$contentId}", [
             'comment' => $request->input('comment')
         ]);
 
@@ -418,7 +460,6 @@ class publicPageController extends Controller
         } else {
             return back()->withErrors(['message' => 'Error adding comment']);
         }
-
     }
 
     public function like($contentId)
@@ -428,11 +469,9 @@ class publicPageController extends Controller
 
         if ($response->successful()) {
             return back()->with(['message' => 'Adding like']);
-
         } else {
             return back()->withErrors(['message' => 'Error adding like']);
         }
-
     }
 
     public function unlike($contentId)
@@ -442,10 +481,8 @@ class publicPageController extends Controller
 
         if ($response->successful()) {
             return back()->with(['message' => 'Like removed']);
-
         } else {
             return back()->withErrors(['message' => 'Error removing like']);
         }
     }
-
 }
